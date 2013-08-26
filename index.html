@@ -1,0 +1,58 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+		<title>TelePrompter</title>
+
+		<meta name="viewport" content="width=device-width">
+		<meta name="author" content="Peter Schmalfeldt">
+		<meta name="description" content="">
+		<meta name="keywords" content="">
+
+		<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800,300' rel='stylesheet' type='text/css'>
+		<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/redmond/jquery-ui.css" />
+		<link rel="stylesheet" href="css/style.css">
+		<link rel="stylesheet" href="css/font-awesome.min.css">
+	</head>
+	<body id="gui">
+		<header>
+			<h1>TelePrompter <span class="clock">00:00:00</span></h1>
+			<nav>
+
+				<div class="buttons">
+					<a class="button small icon-undo reset" href="#" onclick="return false;"></a>
+					<a class="button small icon-text-width flipx" href="#" onclick="return false;"></a>
+					<a class="button small icon-text-height flipy" href="#" onclick="return false;"></a>
+					<a class="button icon-play play active" href="#" onclick="return false;"></a>
+				</div>
+				<div class="sliders">
+					<label>Font Size:&nbsp; <div class="font_size slider"></div></label><br>
+					<label>Speed:&nbsp; <div class="speed slider"></div></label>
+				</div>
+			</nav>
+		</header>
+		<article>
+			<div class="overlay">
+				<div class="top"></div>
+				<div class="bottom"></div>
+			</div>
+			<div class="teleprompter" id="teleprompter" contenteditable>
+				Welcome to the Movers' Benefits insurance marketplace. Your association has worked hard to bring you a private exchange that will cater to your specific insurance needs. Inside this portal you will find options for individual health, life, dental, home, and auto insurance along with a number of other ancillary benefits. You now have a partner that is available 24 hours a day, 7 days a week to help you determine your insurance needs, plus provide insight and help calculate any premium subsidies you may be eligible for through the Affordable Care Act.
+				<br><br>
+				Most of us don't know enough about it and are skeptical of the future of health care and how we will purchase insurance. Information about the Affordable Care Act is out there if one knows where to look, and usually the search can be overwhelming. How do you find someone you can trust to answer your questions properly? The Movers' Benefits Marketplace was created to help bridge this gap and to provide the comfort level you need and deserve when it comes to your family's insurance needs.
+				<br><br>
+				Welcome to YOUR marketplace! We are here to answer your questions and work with you one on one to ensure your satisfaction. We look forward to working together.
+			</div>
+			<i class="icon-play marker"></i>
+		</article>
+		<footer>
+
+		</footer>
+		<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+		<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+		<script src="js/jquery.timer.js"></script>
+		<script src="js/script.min.js"></script>
+	</body>
+</html>

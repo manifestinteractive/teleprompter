@@ -1,4 +1,4 @@
-teleprompter
+Teleprompter
 ============
 
-Teleprompter
+Javascript based Teleprompter
