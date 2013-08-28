@@ -1,43 +1,68 @@
-var pageSpeed = 25,
+var initPageSpeed = 35,
+	initFontSize = 60,
 	scrolldelay,
-	timer;
-
-$(function() {
-	setTimeout(function(){ window.scrollTo(0, 0); }, 100);
-	$('.marker, .overlay').fadeOut(0);
-	clean_teleprompter();
-
 	timer = $('.clock').timer({ stopVal: 10000 });
 
-	$('#teleprompter').change(clean_teleprompter);
+$(function() {
+
+	// Check if we've been here before and made changes
+	if($.cookie('teleprompter_font_size'))
+	{
+		window.initFontSize = $.cookie('teleprompter_font_size');
+	}
+	if($.cookie('teleprompter_speed'))
+	{
+		window.initPageSpeed = $.cookie('teleprompter_speed');
+	}
+	if($.cookie('teleprompter_text'))
+	{
+		$('#teleprompter').html($.cookie('teleprompter_text'));
+	}
+	else
+	{
+		clean_teleprompter();
+	}
+
+	// Listen for Key Presses
+	$('#teleprompter').keyup(update_teleprompter);
 	$('body').keydown(navigate);
 
+	// Setup GUI
+	$('article').stop().animate({scrollTop: 0}, 100, 'linear', function(){ $('article').clearQueue(); });
+	$('.marker, .overlay').fadeOut(0);
 	$('article .teleprompter').css({
 		'padding-bottom': Math.ceil($(window).height()-$('header').height()) + 'px'
 	});
 
+	// Create Font Size Slider
 	$('.font_size').slider({
 		min: 12,
 		max: 100,
-		value: 60,
+		value: window.initFontSize,
 		orientation: "horizontal",
 		range: "min",
 		animate: true,
-		slide: fontSize,
-		change: fontSize
+		slide: function(){ fontSize(true); },
+		change: function(){ fontSize(true); }
 	});
 
+	// Create Speed Slider
 	$('.speed').slider({
-		min: 1,
+		min: 0,
 		max: 50,
-		value: 35,
+		value: window.initPageSpeed,
 		orientation: "horizontal",
 		range: "min",
 		animate: true,
-		slide: speed,
-		change: speed
+		slide: function(){ speed(true); },
+		change: function(){ speed(true); }
 	});
 
+	// Run initial configuration on sliders
+	fontSize(false);
+	speed(false);
+
+	// Listen for Play Button Click
 	$('.button.play').click(function(){
 		if($(this).hasClass('icon-play'))
 		{
@@ -48,6 +73,7 @@ $(function() {
 			stop_teleprompter();
 		}
 	});
+	// Listen for FlipX Button Click
 	$('.button.flipx').click(function(){
 		if($('.teleprompter').hasClass('flipy'))
 		{
@@ -58,6 +84,7 @@ $(function() {
 			$('.teleprompter').toggleClass('flipx');
 		}
 	});
+	// Listen for FlipY Button Click
 	$('.button.flipy').click(function(){
 		if($('.teleprompter').hasClass('flipx'))
 		{
@@ -68,46 +95,65 @@ $(function() {
 			$('.teleprompter').toggleClass('flipy');
 		}
 	});
+	// Listen for Reset Button Click
 	$('.button.reset').click(function(){
 		stop_teleprompter();
-		setTimeout(function(){ window.scrollTo(0, 0); }, 100);
-		$('.speed').slider('value', 35);
-		$('.font_size').slider('value', 60);
-		$('.teleprompter').removeClass('flipx flipy flipxy flipxy_alt');
+		window.timer.resetTimer();
+		$('article').stop().animate({scrollTop: 0}, 100, 'linear', function(){ $('article').clearQueue(); });
 	});
 });
 
-function fontSize()
+// Manage Font Size Change
+function fontSize(save_cookie)
 {
-	var font_size = $('.font_size').slider( "value" );
+	window.initFontSize = $('.font_size').slider( "value" );
 
 	$('article .teleprompter').css({
-		'font-size': font_size + 'px',
-		'line-height': Math.ceil(font_size * 1.5) + 'px',
+		'font-size': window.initFontSize + 'px',
+		'line-height': Math.ceil(window.initFontSize * 1.5) + 'px',
 		'padding-bottom': Math.ceil($(window).height()-$('header').height()) + 'px'
 	});
 
 	$('article .teleprompter p').css({
-		'padding-bottom': Math.ceil(font_size * 0.25) + 'px',
-		'margin-bottom': Math.ceil(font_size * 0.25) + 'px'
+		'padding-bottom': Math.ceil(window.initFontSize * 0.25) + 'px',
+		'margin-bottom': Math.ceil(window.initFontSize * 0.25) + 'px'
 	});
+
+	$('label.font_size_label span').text('(' + window.initFontSize + ')');
+
+	if(save_cookie)
+	{
+		$.cookie('teleprompter_font_size', window.initFontSize);
+	}
 }
 
-function speed()
+// Manage Speed Change
+function speed(save_cookie)
 {
-	pageSpeed = 50 - $('.speed').slider('value');
+	window.initPageSpeed = Math.floor(50 - $('.speed').slider('value'));
+	$('label.speed_label span').text('(' + $('.speed').slider('value') + ')');
+
+	if(save_cookie)
+	{
+		$.cookie('teleprompter_speed', $('.speed').slider('value'));
+	}
 }
 
+// Manage Scrolling Teleprompter
 function pageScroll()
 {
-	$('body').stop().animate({scrollTop: window.pageYOffset + 1}, 1);
-	scrolldelay = setTimeout('pageScroll()', pageSpeed);
+	$('article').animate({scrollTop: "+=1px" }, 0, 'linear', function(){ $('article').clearQueue(); });
+
+	window.clearTimeout(window.scrolldelay);
+	window.scrolldelay = window.setTimeout(pageScroll, window.initPageSpeed);
 
 	// We're at the bottom of the document, stop
-	if(window.pageYOffset >= ( document.body.scrollHeight - $(window).height() ))
+	if($("article").scrollTop() >= ( ( $("article")[0].scrollHeight - $(window).height() ) - 100 ))
 	{
 		stop_teleprompter();
-		setTimeout(function(){ window.scrollTo(0, 0); }, 100);
+		setTimeout(function(){
+			$('article').stop().animate({scrollTop: 0}, 500, 'swing', function(){ $('article').clearQueue(); });
+		}, 500);
 	}
 }
 
@@ -185,36 +231,56 @@ function navigate(evt)
 	}
 }
 
+// Start Teleprompter
 function start_teleprompter()
 {
+	$('#teleprompter').attr('contenteditable', false);
+	$('body').addClass('playing');
 	$('.button.play').removeClass('icon-play').addClass('icon-pause');
 	$('header h1, header nav').fadeTo('slow', 0.15);
 	$('.marker, .overlay').fadeIn('slow');
-	$('body').addClass('playing');
 
-	timer.resetTimer();
-	timer.startTimer();
+	window.timer.resetTimer();
+	window.timer.startTimer();
 
 	pageScroll();
 }
+
+// Stop Teleprompter
 function stop_teleprompter()
 {
 	clearTimeout(scrolldelay);
+	$('#teleprompter').attr('contenteditable', true);
 	$('header h1, header nav').fadeTo('slow', 1);
 	$('.button.play').removeClass('icon-pause').addClass('icon-play');
 	$('.marker, .overlay').fadeOut('slow');
 	$('body').removeClass('playing');
 
-	timer.stopTimer();
+	window.timer.stopTimer();
 }
+
+// Update Teleprompter
+function update_teleprompter()
+{
+	$.cookie('teleprompter_text', $('#teleprompter').html());
+}
+
+// Clean Teleprompter
 function clean_teleprompter()
 {
 	var text = $('#teleprompter').html();
-	$('#teleprompter').html('<p>' + text.replace(/<br>+/g,"@@").replace(/@@@@/g,'</p><p>') + '</p>');
+		text = text.replace(/<br>+/g,'@@').replace(/@@@@/g,'</p><p>');
+		text = text.replace(/@@/g, '<br>');
+		text = text.replace(/([a-z])\. ([A-Z])/g, '$1.&nbsp;&nbsp; $2');
+		text = text.replace(/<p><\/p>/g, '');
+
+	if(text.substr(0,3) !== '<p>')
+	{
+		text = '<p>' + text + '</p>';
+	}
+
+	$('#teleprompter').html(text);
 }
-window.onresize = function(event) {
-    //$('.button.reset').trigger('click');
-};
 
 /*
  * jQuery UI Touch Punch 0.2.2

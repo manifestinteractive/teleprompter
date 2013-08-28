@@ -6,14 +6,18 @@
 
 		<title>TelePrompter</title>
 
-		<meta name="viewport" content="width=device-width">
 		<meta name="author" content="Peter Schmalfeldt">
-		<meta name="description" content="">
-		<meta name="keywords" content="">
+		<meta name="description" content="HTML5, CSS3 &amp; Javascript Based TelePrompter">
+		<meta name="keywords" content="TelePrompter, HTML, HTML5, CSS, CSS3, Javascript">
+
+		<!-- Mobile Specific Meta Tags -->
+		<meta name="viewport" content="width=1024, initial-scale=1, maximum-scale=1">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
 
 		<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800,300' rel='stylesheet' type='text/css'>
 		<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/redmond/jquery-ui.css" />
-		<link rel="stylesheet" href="css/style.css">
+		<link rel="stylesheet" href="css/style.css?v=0.5">
 		<link rel="stylesheet" href="css/font-awesome.min.css">
 	</head>
 	<body id="gui">
@@ -28,8 +32,8 @@
 					<a class="button icon-play play active" href="#" onclick="return false;"></a>
 				</div>
 				<div class="sliders">
-					<label>Font Size:&nbsp; <div class="font_size slider"></div></label><br>
-					<label>Speed:&nbsp; <div class="speed slider"></div></label>
+					<label class="font_size_label">Font Size <span>(60)</span>:&nbsp; <div class="font_size slider"></div></label><br>
+					<label class="speed_label">Speed <span>(35)</span>:&nbsp; <div class="speed slider"></div></label>
 				</div>
 			</nav>
 		</header>
@@ -39,11 +43,31 @@
 				<div class="bottom"></div>
 			</div>
 			<div class="teleprompter" id="teleprompter" contenteditable>
-				Welcome to the Movers' Benefits insurance marketplace. Your association has worked hard to bring you a private exchange that will cater to your specific insurance needs. Inside this portal you will find options for individual health, life, dental, home, and auto insurance along with a number of other ancillary benefits. You now have a partner that is available 24 hours a day, 7 days a week to help you determine your insurance needs, plus provide insight and help calculate any premium subsidies you may be eligible for through the Affordable Care Act.
+				Oh, hello there. I did not see you come in. I was to busy reading off this TelePrompter. It does some pretty cool things, for example:
 				<br><br>
-				Most of us don't know enough about it and are skeptical of the future of health care and how we will purchase insurance. Information about the Affordable Care Act is out there if one knows where to look, and usually the search can be overwhelming. How do you find someone you can trust to answer your questions properly? The Movers' Benefits Marketplace was created to help bridge this gap and to provide the comfort level you need and deserve when it comes to your family's insurance needs.
+				You can edit the text right on the page. It'll even save it for you if you happen to leave the page. That's some smart thinking.
 				<br><br>
-				Welcome to YOUR marketplace! We are here to answer your questions and work with you one on one to ensure your satisfaction. We look forward to working together.
+				If you're using an iPad, you can add a shortcut to your home screen for full screen awesomeness.
+				<br><br>
+				You can also use some handy keyboard shortcuts to speed things up. You can adjust the speed &amp; font size at the top right as well. We're also experimenting with ways to flip the text around for you fancy folks using mirrors.
+				<br><br>
+				The keyboard shortcuts are as  follows:
+				<br><br>
+				Up:  Increases Font Size
+				<br><br>
+				Down:  Decreases Font Size
+				<br><br>
+				Left:  Slows Down Teleprompter
+				<br><br>
+				Right:  Speeds Up Teleprompter
+				<br><br>
+				Space:  Starts / Stops Teleprompter
+				<br><br>
+				Escape: Resets Everything
+				<br><br>
+				Finally, we also made an effort to make sure your text will be easy to read. So if you are pasting text from a word document, we'll do some cleaning up to make the breaks flow more easily.
+				<br><br>
+				Thanks for Stopping by.
 			</div>
 			<i class="icon-play marker"></i>
 		</article>
@@ -53,6 +77,22 @@
 		<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 		<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
 		<script src="js/jquery.timer.js"></script>
-		<script src="js/script.min.js"></script>
+		<script src="js/jquery.cookie.js"></script>
+		<script src="js/script.js"></script>
+
+		<script type="text/javascript">
+
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-19450824-1']);
+		_gaq.push(['_setDomainName', 'peterschmalfeldt.com']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+
+		</script>
 	</body>
 </html>
