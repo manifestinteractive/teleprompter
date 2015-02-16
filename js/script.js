@@ -1,6 +1,8 @@
 var initPageSpeed = 35,
 	initFontSize = 60,
-	scrolldelay,
+	scrollDelay,
+	textColor = '#ffffff',
+	backgroundColor = '#141414',
 	timer = $('.clock').timer({ stopVal: 10000 });
 
 $(function() {
@@ -8,15 +10,29 @@ $(function() {
 	// Check if we've been here before and made changes
 	if($.cookie('teleprompter_font_size'))
 	{
-		window.initFontSize = $.cookie('teleprompter_font_size');
+		initFontSize = $.cookie('teleprompter_font_size');
 	}
 	if($.cookie('teleprompter_speed'))
 	{
-		window.initPageSpeed = $.cookie('teleprompter_speed');
+		initPageSpeed = $.cookie('teleprompter_speed');
 	}
 	if($.cookie('teleprompter_text'))
 	{
 		$('#teleprompter').html($.cookie('teleprompter_text'));
+	}
+	if($.cookie('teleprompter_text_color'))
+	{
+		textColor = $.cookie('teleprompter_text_color');
+		$('#text-color').val(textColor);
+		$('#text-color-picker').css('background-color', textColor);
+		$('#teleprompter').css('color', textColor);
+	}
+	if($.cookie('teleprompter_background_color'))
+	{
+		backgroundColor = $.cookie('teleprompter_background_color');
+		$('#background-color').val(backgroundColor);
+		$('#background-color-picker').css('background-color', textColor);
+		$('#teleprompter').css('background-color', backgroundColor);
 	}
 	else
 	{
@@ -38,7 +54,7 @@ $(function() {
 	$('.font_size').slider({
 		min: 12,
 		max: 100,
-		value: window.initFontSize,
+		value: initFontSize,
 		orientation: "horizontal",
 		range: "min",
 		animate: true,
@@ -50,12 +66,23 @@ $(function() {
 	$('.speed').slider({
 		min: 0,
 		max: 50,
-		value: window.initPageSpeed,
+		value: initPageSpeed,
 		orientation: "horizontal",
 		range: "min",
 		animate: true,
 		slide: function(){ speed(true); },
 		change: function(){ speed(true); }
+	});
+	
+	$('#text-color').change(function(){
+		var color = $(this).val();
+		$('#teleprompter').css('color', color);
+		$.cookie('teleprompter_text_color', color);
+	});
+	$('#background-color').change(function(){
+		var color = $(this).val();
+		$('#teleprompter').css('background-color', color);
+		$.cookie('teleprompter_background_color', color);
 	});
 
 	// Run initial configuration on sliders
@@ -98,7 +125,7 @@ $(function() {
 	// Listen for Reset Button Click
 	$('.button.reset').click(function(){
 		stop_teleprompter();
-		window.timer.resetTimer();
+		timer.resetTimer();
 		$('article').stop().animate({scrollTop: 0}, 100, 'linear', function(){ $('article').clearQueue(); });
 	});
 });
@@ -106,31 +133,31 @@ $(function() {
 // Manage Font Size Change
 function fontSize(save_cookie)
 {
-	window.initFontSize = $('.font_size').slider( "value" );
+	initFontSize = $('.font_size').slider( "value" );
 
 	$('article .teleprompter').css({
-		'font-size': window.initFontSize + 'px',
-		'line-height': Math.ceil(window.initFontSize * 1.5) + 'px',
+		'font-size': initFontSize + 'px',
+		'line-height': Math.ceil(initFontSize * 1.5) + 'px',
 		'padding-bottom': Math.ceil($(window).height()-$('header').height()) + 'px'
 	});
 
 	$('article .teleprompter p').css({
-		'padding-bottom': Math.ceil(window.initFontSize * 0.25) + 'px',
-		'margin-bottom': Math.ceil(window.initFontSize * 0.25) + 'px'
+		'padding-bottom': Math.ceil(initFontSize * 0.25) + 'px',
+		'margin-bottom': Math.ceil(initFontSize * 0.25) + 'px'
 	});
 
-	$('label.font_size_label span').text('(' + window.initFontSize + ')');
+	$('label.font_size_label span').text('(' + initFontSize + ')');
 
 	if(save_cookie)
 	{
-		$.cookie('teleprompter_font_size', window.initFontSize);
+		$.cookie('teleprompter_font_size', initFontSize);
 	}
 }
 
 // Manage Speed Change
 function speed(save_cookie)
 {
-	window.initPageSpeed = Math.floor(50 - $('.speed').slider('value'));
+	initPageSpeed = Math.floor(50 - $('.speed').slider('value'));
 	$('label.speed_label span').text('(' + $('.speed').slider('value') + ')');
 
 	if(save_cookie)
@@ -144,8 +171,8 @@ function pageScroll()
 {
 	$('article').animate({scrollTop: "+=1px" }, 0, 'linear', function(){ $('article').clearQueue(); });
 
-	window.clearTimeout(window.scrolldelay);
-	window.scrolldelay = window.setTimeout(pageScroll, window.initPageSpeed);
+	clearTimeout(scrollDelay);
+	scrollDelay = setTimeout(pageScroll, initPageSpeed);
 
 	// We're at the bottom of the document, stop
 	if($("article").scrollTop() >= ( ( $("article")[0].scrollHeight - $(window).height() ) - 100 ))
@@ -249,7 +276,7 @@ function start_teleprompter()
 // Stop Teleprompter
 function stop_teleprompter()
 {
-	clearTimeout(scrolldelay);
+	clearTimeout(scrollDelay);
 	$('#teleprompter').attr('contenteditable', true);
 	$('header h1, header nav').fadeTo('slow', 1);
 	$('.button.play').removeClass('icon-pause').addClass('icon-play');

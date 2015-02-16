@@ -96,6 +96,7 @@ article .teleprompter
 	-ms-transform: translate3d(0,0,0);
 	-o-transform: translate3d(0,0,0);
 	transform: translate3d(0,0,0);
+	text-shadow: 2px 2px rgba(0, 0, 0, 0.5);
 }
 article .teleprompter p
 {
@@ -137,7 +138,7 @@ article .teleprompter.flipxy
 	pointer-events: none;
 	padding: 1000px 50px 300px 100px !important;
 }
-.sliders, .buttons
+.sliders, .buttons, .colors
 {
 	display: block;
 	height: 64px;
@@ -146,6 +147,13 @@ article .teleprompter.flipxy
 .sliders label:first-child
 {
 	margin-top: 10px;
+}
+.colors
+{
+	width: 64px;
+	padding: 8px;
+	text-align: center;
+	margin-right: 10px;
 }
 .buttons
 {
@@ -218,4 +226,11 @@ article .teleprompter.flipxy
 	background-color: rgba(0,0,0,0.75);
 	overflow: hidden;
 	z-index: 10;
+}
+.color
+{
+	border: 1px solid #fff;
+	width: 44px;
+	outline: none;
+	margin: 4px 0;
 }

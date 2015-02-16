@@ -1,0 +1,8 @@
+############################################
+## Generic System Ignores
+syntax: glob
+
+!.gitignore
+.DS_Store
+Thumbs.db
+.idea
