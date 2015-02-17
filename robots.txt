@@ -1,0 +1,3 @@
+User-agent: *
+
+Sitemap: http://http://promptr.tv/sitemap.xml
