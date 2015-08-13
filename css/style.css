@@ -117,6 +117,12 @@ article .teleprompter.flipx
 	pointer-events: none;
 	padding: 300px 50px 1000px 100px !important;
 }
+.showoverlay-minus {
+}
+
+.showoverlay-plus {
+}
+
 article .teleprompter.flipy
 {
 	-webkit-transform: rotateX(180deg);

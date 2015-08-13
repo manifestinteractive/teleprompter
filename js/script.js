@@ -3,6 +3,7 @@ var initPageSpeed = 35,
 	scrollDelay,
 	textColor = '#ffffff',
 	backgroundColor = '#141414',
+    showOverlay = false,
 	timer = $('.clock').timer({ stopVal: 10000 });
 
 $(function() {
@@ -128,6 +129,15 @@ $(function() {
 		timer.resetTimer();
 		$('article').stop().animate({scrollTop: 0}, 100, 'linear', function(){ $('article').clearQueue(); });
 	});
+    // Listen to overlay show click
+    $('.button.showoverlay')
+        .text('-over')
+        .click(function(){
+        showOverlay = !showOverlay;
+        $('.button.showoverlay').text(showOverlay ? '+over' : '-over');
+        $('.button.showoverlay').toggleClass('showoverlay-plus');
+        $('.button.showoverlay').toggleClass('showoverlay-minus');
+    });
 });
 
 // Manage Font Size Change
@@ -164,6 +174,12 @@ function speed(save_cookie)
 	{
 		$.cookie('teleprompter_speed', $('.speed').slider('value'));
 	}
+}
+
+// Manage overlay shown
+function overlay(show)
+{
+    overlayShow = show;
 }
 
 // Manage Scrolling Teleprompter
@@ -264,8 +280,10 @@ function start_teleprompter()
 	$('#teleprompter').attr('contenteditable', false);
 	$('body').addClass('playing');
 	$('.button.play').removeClass('icon-play').addClass('icon-pause');
-	$('header h1, header nav').fadeTo('slow', 0.15);
-	$('.marker, .overlay').fadeIn('slow');
+    if (showOverlay) {
+	    $('header h1, header nav').fadeTo('slow', 0.15);
+	    $('.marker, .overlay').fadeIn('slow');
+    }
 
 	window.timer.resetTimer();
 	window.timer.startTimer();
@@ -277,10 +295,14 @@ function start_teleprompter()
 function stop_teleprompter()
 {
 	clearTimeout(scrollDelay);
-	$('#teleprompter').attr('contenteditable', true);
-	$('header h1, header nav').fadeTo('slow', 1);
+    $('#teleprompter').attr('contenteditable', true);
+    if (showOverlay) {
+	    $('header h1, header nav').fadeTo('slow', 1);
+    }
 	$('.button.play').removeClass('icon-pause').addClass('icon-play');
-	$('.marker, .overlay').fadeOut('slow');
+    if (showOverlay) {
+	    $('.marker, .overlay').fadeOut('slow');
+    }
 	$('body').removeClass('playing');
 
 	window.timer.stopTimer();
