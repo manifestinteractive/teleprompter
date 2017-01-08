@@ -102,7 +102,10 @@ $(function() {
 	});
 	// Listen for FlipX Button Click
 	$('.button.flipx').click(function(){
-		if($('.teleprompter').hasClass('flipy'))
+
+    timer.resetTimer();
+
+    if($('.teleprompter').hasClass('flipy'))
 		{
 			$('.teleprompter').removeClass('flipy').toggleClass('flipxy');
 		}
@@ -113,6 +116,9 @@ $(function() {
 	});
 	// Listen for FlipY Button Click
 	$('.button.flipy').click(function(){
+
+    timer.resetTimer();
+
 		if($('.teleprompter').hasClass('flipx'))
 		{
 			$('.teleprompter').removeClass('flipx').toggleClass('flipxy');
@@ -120,6 +126,12 @@ $(function() {
 		else
 		{
 			$('.teleprompter').toggleClass('flipy');
+		}
+
+		if ($('.teleprompter').hasClass('flipy')) {
+      $('article').stop().animate({scrollTop: $(".teleprompter").height() + 100 }, 250, 'swing', function(){ $('article').clearQueue(); });
+		} else {
+      $('article').stop().animate({scrollTop: 0 }, 250, 'swing', function(){ $('article').clearQueue(); });
 		}
 	});
 	// Listen for Reset Button Click
@@ -169,18 +181,34 @@ function speed(save_cookie)
 // Manage Scrolling Teleprompter
 function pageScroll()
 {
-	$('article').animate({scrollTop: "+=1px" }, 0, 'linear', function(){ $('article').clearQueue(); });
+	if ($('.teleprompter').hasClass('flipy')) {
+    $('article').animate({scrollTop: "-=1px" }, 0, 'linear', function(){ $('article').clearQueue(); });
 
-	clearTimeout(scrollDelay);
-	scrollDelay = setTimeout(pageScroll, initPageSpeed);
+    clearTimeout(scrollDelay);
+    scrollDelay = setTimeout(pageScroll, initPageSpeed);
 
-	// We're at the bottom of the document, stop
-	if($("article").scrollTop() >= ( ( $("article")[0].scrollHeight - $(window).height() ) - 100 ))
-	{
-		stop_teleprompter();
-		setTimeout(function(){
-			$('article').stop().animate({scrollTop: 0}, 500, 'swing', function(){ $('article').clearQueue(); });
-		}, 500);
+    // We're at the bottom of the document, stop
+    if($("article").scrollTop() === 0)
+    {
+      stop_teleprompter();
+      setTimeout(function(){
+        $('article').stop().animate({scrollTop: $(".teleprompter").height() + 100 }, 500, 'swing', function(){ $('article').clearQueue(); });
+      }, 500);
+    }
+	} else {
+    $('article').animate({scrollTop: "+=1px" }, 0, 'linear', function(){ $('article').clearQueue(); });
+
+    clearTimeout(scrollDelay);
+    scrollDelay = setTimeout(pageScroll, initPageSpeed);
+
+    // We're at the bottom of the document, stop
+    if($("article").scrollTop() >= ( ( $("article")[0].scrollHeight - $(window).height() ) - 100 ))
+    {
+      stop_teleprompter();
+      setTimeout(function(){
+        $('article').stop().animate({scrollTop: 0}, 500, 'swing', function(){ $('article').clearQueue(); });
+      }, 500);
+    }
 	}
 }
 
@@ -267,7 +295,6 @@ function start_teleprompter()
 	$('header h1, header nav').fadeTo('slow', 0.15);
 	$('.marker, .overlay').fadeIn('slow');
 
-	window.timer.resetTimer();
 	window.timer.startTimer();
 
 	pageScroll();
