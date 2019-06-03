@@ -316,7 +316,11 @@ function stop_teleprompter()
 // Update Teleprompter
 function update_teleprompter()
 {
-	$.cookie('teleprompter_text', $('#teleprompter').html());
+	if(evt.keyCode == 27) { // escape
+		$('#teleprompter').blur();
+	} else {
+		$.cookie('teleprompter_text', $('#teleprompter').html());
+	}
 }
 
 // Clean Teleprompter
