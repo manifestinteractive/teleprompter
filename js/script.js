@@ -58,8 +58,8 @@ $(function() {
 		orientation: "horizontal",
 		range: "min",
 		animate: true,
-		slide: function(){ fontSize(true); },
-		change: function(){ fontSize(true); }
+		slide: function(){ fontSize(true, false); },
+		change: function(){ fontSize(true, true); }
 	});
 
 	// Create Speed Slider
@@ -70,10 +70,10 @@ $(function() {
 		orientation: "horizontal",
 		range: "min",
 		animate: true,
-		slide: function(){ speed(true); },
-		change: function(){ speed(true); }
+		slide: function(){ speed(true, false); },
+		change: function(){ speed(true, true); }
 	});
-	
+
 	$('#text-color').change(function(){
 		var color = $(this).val();
 		$('#teleprompter').css('color', color);
@@ -143,7 +143,7 @@ $(function() {
 });
 
 // Manage Font Size Change
-function fontSize(save_cookie)
+function fontSize(save_cookie, send_control_command)
 {
 	initFontSize = $('.font_size').slider( "value" );
 
@@ -160,6 +160,12 @@ function fontSize(save_cookie)
 
 	$('label.font_size_label span').text('(' + initFontSize + ')');
 
+	// Avoid sending the control command when the slider is scrolled, in order to avoid rate limits
+	if(send_control_command)
+	{
+		controlFontSize();
+	}
+
 	if(save_cookie)
 	{
 		$.cookie('teleprompter_font_size', initFontSize);
@@ -167,10 +173,16 @@ function fontSize(save_cookie)
 }
 
 // Manage Speed Change
-function speed(save_cookie)
+function speed(save_cookie, send_control_command)
 {
 	initPageSpeed = Math.floor(50 - $('.speed').slider('value'));
 	$('label.speed_label span').text('(' + $('.speed').slider('value') + ')');
+
+	// Avoid sending the control command when the slider is scrolled, in order to avoid rate limits
+	if(send_control_command)
+	{
+		controlSpeed();
+	}
 
 	if(save_cookie)
 	{
@@ -209,6 +221,22 @@ function pageScroll()
         $('article').stop().animate({scrollTop: 0}, 500, 'swing', function(){ $('article').clearQueue(); });
       }, 500);
     }
+	}
+}
+
+function scrollUp() {
+	if ($('.teleprompter').hasClass('flipy')) {
+		$('article').animate({scrollTop: "+=40px" }, 0, 'linear', function(){ $('article').clearQueue(); });
+	} else {
+		$('article').animate({scrollTop: "-=40px" }, 0, 'linear', function(){ $('article').clearQueue(); });
+	}
+}
+
+function scrollDown() {
+	if ($('.teleprompter').hasClass('flipy')) {
+		$('article').animate({scrollTop: "-=40px" }, 0, 'linear', function(){ $('article').clearQueue(); });
+	} else {
+		$('article').animate({scrollTop: "+=40px" }, 0, 'linear', function(){ $('article').clearQueue(); });
 	}
 }
 

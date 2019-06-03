@@ -11,7 +11,7 @@
 		<meta name="keywords" content="TelePrompter, HTML, HTML5, CSS, CSS3, Javascript">
 
 		<!-- Mobile Specific Meta Tags -->
-		<meta name="viewport" content="width=1024, initial-scale=1, maximum-scale=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
 
@@ -19,12 +19,15 @@
 		<link rel="stylesheet" href="https://code.jquery.com/ui/1.10.3/themes/redmond/jquery-ui.css" />
 		<link rel="stylesheet" href="css/style.css?v=0.6.1">
 		<link rel="stylesheet" href="css/font-awesome.min.css">
+		<script src="https://js.pusher.com/4.4/pusher.min.js"></script>
 	</head>
 	<body id="gui">
 		<header>
 			<h1><i class="icon icon-bullhorn"></i> <span class="clock">00:00:00</span></h1>
 			<nav>
-                <div class="buttons">
+        <div class="buttons">
+					<a class="button small icon-th control hidden" href="#" onclick="return false;"></a>
+					<a class="button small icon-link link hidden" href="#" onclick="return false;"></a>
 					<a class="button small icon-undo reset" href="#" onclick="return false;"></a>
 					<a class="button small icon-text-width flipx" href="#" onclick="return false;"></a>
 					<a class="button small icon-text-height flipy" href="#" onclick="return false;"></a>
@@ -74,6 +77,29 @@
 			</div>
 			<i class="icon-play marker"></i>
 		</article>
+		<article id="control" class="hidden">
+			<header>
+				<a class="button icon-remove close-controls" href="#" onclick="return false;"></a>
+			</header>
+			<section>
+				<a class="button icon-chevron-up scroll-up" href="#" onclick="return false;"></a>
+				<a class="button icon-play control-play" href="#" onclick="return false;"></a>
+				<a class="button icon-chevron-down scroll-down" href="#" onclick="return false;"></a>
+
+				<div class="font-size-control plusminus-controls">
+					<a class="button icon-minus decrease" href="#" onclick="return false;"></a>
+					<span>Font Size</span>
+					<a class="button icon-plus increase" href="#" onclick="return false;"></a>
+				</div>
+
+				<div class="speed-control plusminus-controls">
+					<a class="button icon-minus decrease" href="#" onclick="return false;"></a>
+					<span>Speed</span>
+					<a class="button icon-plus increase" href="#" onclick="return false;"></a>
+				</div>
+
+			</section>
+		</article>
 		<footer>
 
 		</footer>
@@ -81,7 +107,9 @@
 		<script src="https://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
 		<script src="js/jquery.timer.js"></script>
 		<script src="js/jquery.cookie.js"></script>
-        <script src="js/jscolor.js"></script>
-		<script src="js/script.js?v=0.6.2"></script>
+		<script src="js/jscolor.js"></script>
+		<script src="js/script.js?v=0.6.3"></script>
+		<script src="js/pusher.php?v=0.1.0"></script>
+		<script src="js/stream.js?v=0.1.0"></script>
 	</body>
 </html>
