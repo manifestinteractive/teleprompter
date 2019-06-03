@@ -314,7 +314,7 @@ function stop_teleprompter()
 }
 
 // Update Teleprompter
-function update_teleprompter()
+function update_teleprompter(evt)
 {
 	if(evt.keyCode == 27) { // escape
 		$('#teleprompter').blur();
