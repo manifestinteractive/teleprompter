@@ -21,10 +21,25 @@
 		<link rel="stylesheet" href="css/font-awesome.min.css">
 	</head>
 	<body id="gui">
+		<div class="remote-modal">
+			<a class="button icon-remove-circle close-modal" href="javascript:void(0)"></a>
+			<div class="modal-content">
+				<h1>Remote Control</h1>
+				<p>Access the Following URL from another device:</p>
+				<p class="remote-url">https://promptr.tv/remote</p>
+				<p>Enter this Remote ID:</p>
+				<p class="remote-id"></p>
+				<div id="qr-code"></div>
+				<p>Remote Control QR Code</p>
+			</div>
+			<div class="modal-overlay"></div>
+		</div>
+
 		<header>
 			<h1><i class="icon icon-bullhorn"></i> <span class="clock">00:00:00</span></h1>
 			<nav>
                 <div class="buttons">
+					<a class="button small icon-tablet remote" href="#" onclick="return false;"></a>
 					<a class="button small icon-undo reset" href="#" onclick="return false;"></a>
 					<a class="button small icon-text-width flipx" href="#" onclick="return false;"></a>
 					<a class="button small icon-text-height flipy" href="#" onclick="return false;"></a>
@@ -77,11 +92,9 @@
 		<footer>
 
 		</footer>
-		<script src="https://code.jquery.com/jquery-1.10.1.min.js"></script>
-		<script src="https://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-		<script src="js/jquery.timer.js"></script>
-		<script src="js/jquery.cookie.js"></script>
-        <script src="js/jscolor.js"></script>
-		<script src="js/script.js?v=0.6.2"></script>
+
+		<script src="https://promptr.tv/remote/socket.io/socket.io.js"></script>
+		<script src="js/plugins.js?v=1.1.0"></script>
+		<script src="js/script.js?v=1.1.0"></script>
 	</body>
 </html>
