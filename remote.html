@@ -337,7 +337,7 @@
                 }
 
                 function clientConnect(remote) {
-                    socket = io();
+                    socket = io.connect('https://promptr.tv', { path: '/remote/socket.io' });
 
                     socket.on('connect', function() {
                         socket.emit('connectToRemote', remote);
