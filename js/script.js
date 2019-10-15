@@ -347,9 +347,8 @@
 
 	// Manage Speed Change
 	function speed(save) {
-		initPageSpeed = Math.floor(50 - $('.speed').slider('value'));
+		initPageSpeed = $('.speed').slider('value');
 		$('label.speed_label span').text('(' + $('.speed').slider('value') + ')');
-
 		if (save) {
 			config.set('teleprompter_speed', $('.speed').slider('value'));
 		}
@@ -360,10 +359,17 @@
 		var offset = 1;
 		var animate = 0;
 
+		if (initPageSpeed == 0) {
+			$('article').stop().clearQueue();
+			clearTimeout(scrollDelay);
+			scrollDelay = setTimeout(pageScroll, 500);
+			return;
+		}
+
 		if (!direction) {
 			direction = 'down'
 			clearTimeout(scrollDelay);
-			scrollDelay = setTimeout(pageScroll, initPageSpeed);
+			scrollDelay = setTimeout(pageScroll, Math.floor(50 - initPageSpeed));
 		} else {
 			offset = window.screen.availHeight / 2;
 			animate = 500;
