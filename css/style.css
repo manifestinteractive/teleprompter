@@ -96,6 +96,7 @@ article .teleprompter
 	-ms-transform: translate3d(0,0,0);
 	-o-transform: translate3d(0,0,0);
 	transform: translate3d(0,0,0);
+        margin: auto;
 }
 article .teleprompter p
 {
@@ -136,6 +137,9 @@ article .teleprompter.flipxy
 	z-index: 1;
 	pointer-events: none;
 	padding: 1000px 50px 300px 100px !important;
+}
+.sliders.spacing{
+    margin-left:15px;
 }
 .sliders, .buttons, .colors
 {
@@ -208,7 +212,7 @@ article .teleprompter.flipxy
 .overlay .top
 {
 	position: fixed;
-	top: 64px;
+	top: 0px;
 	height: 100px;
 	width: 100%;
 	background-color: #000;

@@ -1,6 +1,8 @@
 (function () {
 	var initPageSpeed = 35,
 	initFontSize = 60,
+        initContentWidth = 100,
+        initMarkerPosition = 30,
 	scrollDelay,
 	textColor = '#ffffff',
 	backgroundColor = '#141414',
@@ -50,6 +52,12 @@
 		}
 		if (config.get('teleprompter_speed')) {
 			initPageSpeed = config.get('teleprompter_speed');
+		}
+                if (config.get('teleprompter_prompter_width')) {
+			initContentWidth = config.get('teleprompter_prompter_width');
+		}
+                if (config.get('teleprompter_marker_position')) {
+			initMarkerPosition = config.get('teleprompter_marker_position');
 		}
 		if (config.get('teleprompter_text')) {
 			$('#teleprompter').html(config.get('teleprompter_text'));
@@ -103,7 +111,7 @@
 		// Create Speed Slider
 		$('.speed').slider({
 			min: 0,
-			max: 50,
+			max: 100,
 			value: initPageSpeed,
 			orientation: "horizontal",
 			range: "min",
@@ -115,6 +123,39 @@
 				speed(true);
 			}
 		});
+                
+                $('.prompter_width').slider({
+			min: 20,
+			max: 100,
+			value: initContentWidth,
+			orientation: "horizontal",
+			range: "min",
+			animate: true,
+			slide: function() {
+				prompterWidth(true);
+			},
+			change: function() {
+				prompterWidth(true);
+			}
+		});
+                
+                $('.marker_position').slider({
+			min: 20,
+			max: 90,
+			value: initMarkerPosition,
+			orientation: "horizontal",
+			range: "min",
+			animate: true,
+			slide: function() {
+				markerPosition(true);
+			},
+			change: function() {
+				markerPosition(true);
+                                $('.marker, .overlay').fadeOut('slow');
+			}
+		});
+                
+                
 
 		$('#text-color').change(function() {
 			var color = $(this).val();
@@ -130,6 +171,8 @@
 		// Run initial configuration on sliders
 		fontSize(false);
 		speed(false);
+                prompterWidth(false);
+                markerPosition(false);
 
 		// Listen for Play Button Click
 		$('.button.play').click(function() {
@@ -354,6 +397,46 @@
 			config.set('teleprompter_speed', $('.speed').slider('value'));
 		}
 	}
+                
+
+        // Manage contetn width
+	function prompterWidth(save) {
+		initContentWidth = Math.floor($('.prompter_width').slider('value'));
+                
+                $('article .teleprompter').css({
+			'width': initContentWidth + '%',
+		});
+                
+		$('label.prompter_width_label span').text('(' + $('.prompter_width').slider('value') + '%)');
+
+		if (save) {
+			config.set('teleprompter_prompter_width', $('.prompter_width').slider('value'));
+		}
+	}
+        
+        // Manage marker position
+	function markerPosition(save) {
+		initMarkerPosition = Math.floor($('.marker_position').slider('value'));
+                
+                $('.marker').css({
+			'top': 'calc('+initMarkerPosition + '% - 20px)',
+		});
+                
+                $('.overlay .top').css({
+			'height': 'calc('+initMarkerPosition + '% - 90px)',
+		});
+                $('.overlay .bottom').css({
+			'top': 'calc('+initMarkerPosition + '% + 90px)',
+		});
+                
+		$('label.marker_position_label span').text('(' + $('.marker_position').slider('value') + ')');
+
+		if (save) {
+                        $('.marker, .overlay').fadeIn('slow');
+			config.set('teleprompter_marker_position', $('.speed').slider('value'));
+		}
+	}
+        
 
 	// Manage Scrolling Teleprompter
 	function pageScroll(direction) {
