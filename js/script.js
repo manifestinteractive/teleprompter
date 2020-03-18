@@ -111,7 +111,7 @@
 		// Create Speed Slider
 		$('.speed').slider({
 			min: 0,
-			max: 100,
+			max: 50,
 			value: initPageSpeed,
 			orientation: "horizontal",
 			range: "min",
