@@ -91,11 +91,7 @@ article .teleprompter
 	line-height: 86px;
 	z-index: 1;
 	background-color: #141414;
-	-webkit-transform: translate3d(0,0,0);
-	-moz-transform: translate3d(0,0,0);
-	-ms-transform: translate3d(0,0,0);
-	-o-transform: translate3d(0,0,0);
-	transform: translate3d(0,0,0);
+	will-change: transform;
 }
 article .teleprompter p
 {
@@ -109,30 +105,21 @@ article .teleprompter p:last-child
 }
 article .teleprompter.flipx
 {
-	-webkit-transform: rotateY(180deg);
-	-moz-transform: rotateY(180deg);
-	-o-transform: rotateY(180deg);
-	-ms-transform: rotateY(180deg);
+	transform: rotateY(180deg);
 	z-index: 1;
 	pointer-events: none;
 	padding: 300px 50px 1000px 100px !important;
 }
 article .teleprompter.flipy
 {
-	-webkit-transform: rotateX(180deg);
-	-moz-transform: rotateX(180deg);
-	-o-transform: rotateX(180deg);
-	-ms-transform: rotateX(180deg);
+	transform: rotateX(180deg);
 	z-index: 1;
 	pointer-events: none;
 	padding: 1000px 50px 300px 100px !important;
 }
 article .teleprompter.flipxy
 {
-	-webkit-transform: rotateX(180deg) rotateY(180deg);
-	-moz-transform: rotateX(180deg) rotateY(180deg);
-	-o-transform: rotateX(180deg) rotateY(180deg);
-	-ms-transform: rotateX(180deg) rotateY(180deg);
+	transform: rotateX(180deg) rotateY(180deg);
 	z-index: 1;
 	pointer-events: none;
 	padding: 1000px 50px 300px 100px !important;
