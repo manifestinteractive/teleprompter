@@ -1,6 +1,7 @@
 (function () {
 	var initPageSpeed = 35,
 	initFontSize = 60,
+	initLateralPadding = 100,
 	scrollDelay,
 	textColor = '#ffffff',
 	backgroundColor = '#141414',
@@ -47,6 +48,9 @@
 		// Check if we've been here before and made changes
 		if (config.get('teleprompter_font_size')) {
 			initFontSize = config.get('teleprompter_font_size');
+		}
+		if (config.get('teleprompter_lateral_padding')) {
+			initLateralPadding = config.get('teleprompter_lateral_padding');
 		}
 		if (config.get('teleprompter_speed')) {
 			initPageSpeed = config.get('teleprompter_speed');
@@ -116,6 +120,22 @@
 			}
 		});
 
+		// Create Lateral Padding Slider
+		$('.lateral_padding').slider({
+			min: 5,
+			max: 40,
+			value: initLateralPadding,
+			orientation: "horizontal",
+			range: "min",
+			animate: true,
+			slide: function() {
+				lateralPadding(true);
+			},
+			change: function() {
+				lateralPadding(true);
+			}
+		});
+
 		$('#text-color').change(function() {
 			var color = $(this).val();
 			$('#teleprompter').css('color', color);
@@ -130,6 +150,7 @@
 		// Run initial configuration on sliders
 		fontSize(false);
 		speed(false);
+		lateralPadding(false);
 
 		// Listen for Play Button Click
 		$('.button.play').click(function() {
@@ -355,6 +376,22 @@
 		}
 	}
 
+	// Manage Lateral Padding Change
+	function lateralPadding(save) {
+		initLateralPadding = $('.lateral_padding').slider('value');
+
+		$('#teleprompter').css({
+			'padding-left': initLateralPadding + '%',
+			'padding-right': initLateralPadding + '%'
+		});
+
+		$('label.lateral_padding_label span').text('(' + $('.lateral_padding').slider('value') + '%)');
+
+		if (save) {
+			config.set('teleprompter_lateral_padding', $('.lateral_padding').slider('value'));
+		}
+	}
+
 	// Manage Scrolling Teleprompter
 	function pageScroll(direction) {
 		var offset = 1;
@@ -416,8 +453,11 @@
 			up = 38,
 			right = 39,
 			down = 40,
+			numpad_minus = 109,
+			numpad_plus = 107,
 			speed = $('.speed').slider('value'),
-			font_size = $('.font_size').slider('value');
+			font_size = $('.font_size').slider('value'),
+			lateral_padding = $('.lateral_padding').slider('value');
 
 		// Exit if we're inside an input field
 		if (typeof evt.target.id == 'undefined' || evt.target.id == 'teleprompter') {
@@ -466,6 +506,20 @@
 		// Increase Speed with Right Arrow
 		else if (evt.keyCode == right) {
 			$('.speed').slider('value', speed + 1);
+			evt.preventDefault();
+			evt.stopPropagation();
+			return false;
+		}
+		// Increase Lateral Padding with Numpad Plus
+		else if (evt.keyCode == numpad_plus) {
+			$('.lateral_padding').slider('value', lateral_padding + 1);
+			evt.preventDefault();
+			evt.stopPropagation();
+			return false;
+		}
+		// Decrease Lateral Padding with Numpad Minus
+		else if (evt.keyCode == numpad_minus) {
+			$('.lateral_padding').slider('value', lateral_padding - 1);
 			evt.preventDefault();
 			evt.stopPropagation();
 			return false;

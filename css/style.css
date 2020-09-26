@@ -130,16 +130,16 @@ article .teleprompter.flipxy
 	height: 64px;
 	float: right;
 }
-.sliders label:first-child
+.sliders
 {
 	margin-top: 10px;
+	margin-left: 20px;
 }
 .colors
 {
 	width: 64px;
 	padding: 8px;
 	text-align: center;
-	margin-right: 10px;
 }
 .buttons
 {
