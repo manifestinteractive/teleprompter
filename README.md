@@ -6,11 +6,9 @@ If you're using an iPad, you can add a shortcut to your home screen for full scr
 
 You can also use some handy keyboard shortcuts. You can adjust the speed & font size at the top right as well. I'm also experimenting with ways to flip the text around for you fancy folks using mirrors.
 
-A new feature, requested by [Richard Di Brittannia](https://soundcloud.com/rdbritannia), allows you to change the colors of the text and background for situations where it might make things easier for you.  Changes are of course saved automatically.  ( Make sure you clear your browsers cache if you do not see these changes )
-
 [![Buy Me Coffee](https://peterschmalfeldt.com/buy-me-coffee.png)](https://www.paypal.me/manifestinteractive)
 
-## Now Available @ [http://promptr.tv](http://promptr.tv) ##
+## Now Available @ [https://promptr.tv](https://promptr.tv) ##
 
 
 ## Keyboard Shortcuts ##
