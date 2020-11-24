@@ -247,7 +247,7 @@
 		});
 
 		socket.on('remoteControl', function (command) {
-			switch (command) {
+			switch (command.command) {
 				case 'reset':
 					$('.button.reset').trigger('click');
 					break;
@@ -298,6 +298,12 @@
 
 				case 'hideModal':
 					$('.remote-modal').hide();
+					break;
+
+				case 'setText':
+					$('#teleprompter').html(command.text);
+					update_teleprompter();
+					clean_teleprompter();
 					break;
 			}
 		});

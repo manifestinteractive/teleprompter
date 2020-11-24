@@ -24,7 +24,6 @@
         html, body {
             width: 100%;
             height: 100%;
-            overflow: hidden;
         }
         body {
             background-color: #141414;
@@ -35,7 +34,6 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            overflow: hidden;
         }
 
         .remote-wrapper {
@@ -43,9 +41,9 @@
             height: 100%;
             overflow: hidden;
             display: flex;
+            flex-direction: column;
             align-items: center;
-            justify-content: center;
-            overflow: hidden;
+            justify-content: space-around;
         }
 
         #remote-control {
@@ -92,24 +90,17 @@
         }
 
         .remote {
-            max-width: 300px;
-            height: 330px;
             width: 100%;
-            position: fixed;
-            overflow: hidden;
         }
 
         .header {
-            position: fixed;
-            top: 40px;
+            position: relative;
             max-width: 300px;
             width: 100%;
             margin: 0 auto;
         }
 
         .footer {
-            position: fixed;
-            bottom: 40px;
             max-width: 300px;
             width: 100%;
             margin: 0 auto;
@@ -152,6 +143,21 @@
             text-align: center;
             white-space: nowrap;
         }
+        textarea {
+            min-width:  90vw;
+            max-width:  90vw;
+            min-height: 30vh;
+            max-height: 50vh;
+        }
+
+        button {
+            background: none;
+            border: 2px solid #fff;
+            color: #fff;
+            font-size: 1.25rem;
+            line-height: 1.2;
+            padding: .25rem .5rem;
+        }
         </style>
     </head>
     <body>
@@ -191,7 +197,15 @@
                 <div class="text-center">
                     <a class="button icon-chevron-down down" id="button-down" href="javascript:void(0)" onclick="return false;"></a>
                 </div>
+                <div>
+                    <form id="remote-text-form" class="text-center">
+                        <textarea name="text"></textarea>
+                        <br>
+                        <button type="submit">Update</button>
+                    </form>
+                </div>
             </div>
+
 
             <div class="footer text-center" id="remote-id"></div>
         </div>
@@ -225,6 +239,7 @@
                 const faster = document.getElementById('button-faster');
                 const down = document.getElementById('button-down');
                 const input = document.getElementsByClassName('remote-id')[0];
+                const textForm = document.getElementById('remote-text-form');
 
                 var currentRemote = config.get('remote-id');
                 var urlParamID = getRemoteId();
@@ -256,7 +271,7 @@
                 reset.addEventListener('click', function(e) {
                     e.preventDefault();
                     if (socket && remote) {
-                        socket.emit('sendRemoteControl', 'reset');
+                        socket.emit('sendRemoteControl', {command: 'reset'});
                     }
                 });
 
@@ -264,7 +279,7 @@
                 power.addEventListener('click', function(e) {
                     e.preventDefault();
                     if (socket && remote) {
-                        socket.emit('sendRemoteControl', 'power');
+                        socket.emit('sendRemoteControl', {command: 'power'});
                         clientDisconnect();
                     }
                 });
@@ -273,7 +288,7 @@
                 up.addEventListener('click', function(e) {
                     e.preventDefault();
                     if (socket && remote) {
-                        socket.emit('sendRemoteControl', 'up');
+                        socket.emit('sendRemoteControl', {command: 'up'});
                     }
                 });
 
@@ -281,7 +296,7 @@
                 slower.addEventListener('click', function(e) {
                     e.preventDefault();
                     if (socket && remote) {
-                        socket.emit('sendRemoteControl', 'slower');
+                        socket.emit('sendRemoteControl', {command: 'slower'});
                     }
                 });
 
@@ -289,7 +304,7 @@
                 play.addEventListener('click', function(e) {
                     e.preventDefault();
                     if (socket && remote) {
-                        socket.emit('sendRemoteControl', 'play');
+                        socket.emit('sendRemoteControl', {command: 'play'});
                     }
                 });
 
@@ -297,7 +312,7 @@
                 faster.addEventListener('click', function(e) {
                     e.preventDefault();
                     if (socket && remote) {
-                        socket.emit('sendRemoteControl', 'faster');
+                        socket.emit('sendRemoteControl', {command: 'faster'});
                     }
                 });
 
@@ -305,9 +320,21 @@
                 down.addEventListener('click', function(e) {
                     e.preventDefault();
                     if (socket && remote) {
-                        socket.emit('sendRemoteControl', 'down');
+                        socket.emit('sendRemoteControl', {command: 'down'});
                     }
                 });
+
+                textForm.addEventListener('submit', function (e) {
+                  e.preventDefault();
+                  const text = new FormData(textForm)
+                    .get('text')
+                    .split(/\n/)
+                    .filter(chunk => !!chunk.trim())
+                    .join('<br><br>')
+                  if (socket && remote) {
+                    socket.emit('sendRemoteControl', {command: 'setText', text})
+                  }
+                })
 
                 function getUrlVars() {
                     var vars = {};
@@ -354,7 +381,7 @@
                         input.classList.remove('error');
                         input.classList.remove('success');
 
-                        socket.emit('sendRemoteControl', 'hideModal');
+                        socket.emit('sendRemoteControl', {command: 'hideModal'});
                     });
 
                     socket.on('clientCommand', function (command, value) {
