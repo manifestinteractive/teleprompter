@@ -80,9 +80,14 @@ article
 	overflow: auto;
 	background-color: #141414;
 }
-body.playing article
-{
-	overflow: hidden;
+body.playing article::-webkit-scrollbar {
+	background: #141414;
+}
+body.playing article::-webkit-scrollbar-thumb {
+	background: #141414;
+}
+body.playing article::-webkit-scrollbar-corner {
+	background: #141414;
 }
 article .teleprompter
 {
