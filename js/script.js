@@ -416,6 +416,11 @@
 			up = 38,
 			right = 39,
 			down = 40,
+			page_up = 33,
+			page_down = 34,
+			b_key = 66,
+			f5_key = 116,
+			period_key = 190,
 			speed = $('.speed').slider('value'),
 			font_size = $('.font_size').slider('value');
 
@@ -436,14 +441,14 @@
 			return false;
 		}
 		// Start Stop Scrolling
-		else if (evt.keyCode == space) {
+		else if (evt.keyCode == space || [b_key, f5_key, period_key].includes(evt.keyCode)) {
 			$('.button.play').trigger('click');
 			evt.preventDefault();
 			evt.stopPropagation();
 			return false;
 		}
 		// Decrease Speed with Left Arrow
-		else if (evt.keyCode == left) {
+		else if (evt.keyCode == left || evt.keyCode == page_up) {
 			$('.speed').slider('value', speed - 1);
 			evt.preventDefault();
 			evt.stopPropagation();
@@ -464,7 +469,7 @@
 			return false;
 		}
 		// Increase Speed with Right Arrow
-		else if (evt.keyCode == right) {
+		else if (evt.keyCode == right || evt.keyCode == page_down) {
 			$('.speed').slider('value', speed + 1);
 			evt.preventDefault();
 			evt.stopPropagation();
