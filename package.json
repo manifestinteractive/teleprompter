@@ -30,7 +30,7 @@
     "dependencies": {
         "express": "^4.17.1",
         "forever": "^1.0.0",
-        "socket.io": "^2.2.0"
+        "socket.io": "^2.4.0"
     },
     "devDependencies": {
         "http-server": "^0.11.1"
