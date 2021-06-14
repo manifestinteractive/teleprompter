@@ -1,4 +1,5 @@
-## Teleprompter ##
+Teleprompter
+===
 
 You can edit the text right on the page. It'll even save your changes for you if you happen to leave the page.
 
@@ -13,13 +14,15 @@ You can also use some handy keyboard shortcuts. You can adjust the speed & font 
 
 ## Keyboard Shortcuts ##
 
-- **Up**: Increases Font Size
-- **Down**: Decreases Font Size
-- **Left**: Slows Down Teleprompter
-- **Right**: Speeds Up Teleprompter
-- **Space**: Starts / Stops Teleprompter
-- **Escape**: Resets GUI
+Key              | Alternatives                            | Description
+:---------------:|:---------------------------------------:|:--------------------------
+<kbd>↑</kbd>     |                                         | Increase Font Size
+<kbd>↓</kbd>     |                                         | Decrease Font Size
+<kbd>←</kbd>     | <kbd>PAGE UP</kbd>                      | Slow Down Teleprompter
+<kbd>→</kbd>     | <kbd>PAGE DOWN</kbd>                    | Speed Up Teleprompter
+<kbd>SPACE</kbd> | <kbd>B</kbd> <kbd>F5</kbd> <kbd>.</kbd> | Start / Stop Teleprompter
+<kbd>ESC</kbd>   |                                         | Resets GUI
 
-Finally, we also made an effort to make sure your text will be easy to read.   So if you are pasting text from a word document, we'll do some cleaning up to make the breaks flow more easily.
+We also made an effort to make sure your text will be easy to read.   So if you are pasting text from a word document, we'll do some cleaning up to make the breaks flow more easily.
 
 Follow me on Twitter for updates: **[@mrmidi](http://twitter.com/mrmidi "Follow @mrmidi on Twitter")**

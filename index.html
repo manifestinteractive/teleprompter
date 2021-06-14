@@ -1,100 +1,132 @@
 <!DOCTYPE HTML>
-<html>
-	<head>
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<html lang="en">
 
-		<title>TelePrompter</title>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-		<meta name="author" content="Peter Schmalfeldt">
-		<meta name="description" content="HTML5, CSS3 &amp; Javascript Based TelePrompter">
-		<meta name="keywords" content="TelePrompter, HTML, HTML5, CSS, CSS3, Javascript">
+  <title>TelePrompter</title>
 
-		<!-- Mobile Specific Meta Tags -->
-		<meta name="viewport" content="width=1024, initial-scale=1, maximum-scale=1">
-		<meta name="apple-mobile-web-app-capable" content="yes">
-		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="author" content="Peter Schmalfeldt">
+  <meta name="description" content="HTML5, CSS3 and JavaScript-Based TelePrompter">
+  <meta name="keywords" content="TelePrompter, HTML, HTML5, CSS, CSS3, JavaScript">
 
-		<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800,300' rel='stylesheet' type='text/css'>
-		<link rel="stylesheet" href="https://code.jquery.com/ui/1.10.3/themes/redmond/jquery-ui.css" />
-		<link rel="stylesheet" href="css/style.css?v=1.1.1">
-		<link rel="stylesheet" href="css/font-awesome.min.css">
-	</head>
-	<body id="gui">
-		<div class="remote-modal">
-			<a class="button icon-remove-circle close-modal" href="javascript:void(0)"></a>
-			<div class="modal-content">
-				<h1>Remote Control</h1>
-				<p>Access the Following URL from another device:</p>
-				<p class="remote-url">https://promptr.tv/remote</p>
-				<p>Enter this Remote ID:</p>
-				<p class="remote-id"></p>
-				<div id="qr-code"></div>
-				<p>Remote Control QR Code</p>
-			</div>
-			<div class="modal-overlay"></div>
-		</div>
+  <!-- Mobile Specific Meta Tags -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
-		<header>
-			<h1><i class="icon icon-bullhorn"></i> <span class="clock">00:00:00</span></h1>
-			<nav>
-                <div class="buttons">
-					<a class="button small icon-tablet remote" href="#" onclick="return false;"></a>
-					<a class="button small icon-undo reset" href="#" onclick="return false;"></a>
-					<a class="button small icon-text-width flipx" href="#" onclick="return false;"></a>
-					<a class="button small icon-text-height flipy" href="#" onclick="return false;"></a>
-					<a class="button icon-play play active" href="#" onclick="return false;"></a>
-				</div>
-				<div class="sliders">
-					<label class="font_size_label">Font Size <span>(60)</span>:&nbsp; <div class="font_size slider"></div></label><br>
-					<label class="speed_label">Speed <span>(35)</span>:&nbsp; <div class="speed slider"></div></label>
-				</div>
-                <div class="colors">
-                    <input id="text-color-picker" class="color {hash:true,caps:true,valueElement:'text-color'}"><input type="hidden" id="text-color" value="#ffffff">
-                    <input id="background-color-picker" class="color {hash:true,caps:true,valueElement:'background-color'}"><input type="hidden" id="background-color" value="#141414">
-                </div>
-			</nav>
-		</header>
-		<article>
-			<div class="overlay">
-				<div class="top"></div>
-				<div class="bottom"></div>
-			</div>
-			<div class="teleprompter" id="teleprompter" contenteditable>
-				Oh, hello there. I did not see you come in. I was to busy reading off this TelePrompter. It does some pretty cool things, for example:
-				<br><br>
-				You can edit the text right on the page. It'll even save it for you if you happen to leave the page. That's some smart thinking.
-				<br><br>
-				If you're using an iPad, you can add a shortcut to your home screen for full screen awesomeness.
-				<br><br>
-				You can also use some handy keyboard shortcuts to speed things up. You can adjust the speed &amp; font size at the top right as well. We're also experimenting with ways to flip the text around for you fancy folks using mirrors.
-				<br><br>
-				The keyboard shortcuts are as  follows:
-				<br><br>
-				Up:  Increases Font Size
-				<br><br>
-				Down:  Decreases Font Size
-				<br><br>
-				Left:  Slows Down Teleprompter
-				<br><br>
-				Right:  Speeds Up Teleprompter
-				<br><br>
-				Space:  Starts / Stops Teleprompter
-				<br><br>
-				Escape: Resets Everything
-				<br><br>
-				Finally, we also made an effort to make sure your text will be easy to read. So if you are pasting text from a word document, we'll do some cleaning up to make the breaks flow more easily.
-				<br><br>
-				Thanks for Stopping by.
-			</div>
-			<i class="icon-play marker"></i>
-		</article>
-		<footer>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800,300' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.3/themes/redmond/jquery-ui.css" />
+  <link rel="stylesheet" href="css/style.css?v=1.2.0">
+  <link rel="stylesheet" href="css/font-awesome.min.css">
 
-		</footer>
+  <link href="favicon.ico" rel="shortcut icon">
+  <link rel="apple-touch-icon-precomposed" href="img/apple/icon-57x57.png" />
+  <link rel="apple-touch-icon" sizes="72x72" href="img/apple/icon-72x72.png" />
+  <link rel="apple-touch-icon" sizes="114x114" href="img/apple/icon-114x114.png" />
+  <link rel="apple-touch-icon" sizes="144x144" href="img/apple/icon-144x144.png" />
+</head>
 
-		<script src="https://promptr.tv/remote/socket.io/socket.io.js"></script>
-		<script src="js/plugins.js?v=1.1.1"></script>
-		<script src="js/script.js?v=1.1.1"></script>
-	</body>
+<body id="gui">
+  <div class="remote-modal">
+    <a class="button icon-remove-circle close-modal" href="javascript:void(0)" role="button" aria-label="Close Modal" title="Close Modal"></a>
+    <div class="modal-content">
+      <h1>Remote Control</h1>
+      <p>Access the Following URL from another device:</p>
+      <p class="remote-url">https://promptr.tv/remote</p>
+      <p>Enter this Remote ID:</p>
+      <p class="remote-id"></p>
+      <div id="qr-code"></div>
+      <p>Remote Control QR Code</p>
+    </div>
+    <div class="modal-overlay"></div>
+  </div>
+
+  <header>
+    <h1><i class="icon icon-bullhorn"></i> <span class="clock">00:00:00</span></h1>
+    <nav>
+      <div class="colors">
+        <input type="color" id="text-color" value="#ffffff" aria-label="Text Color">
+        <input type="color" id="background-color" value="#141414" aria-label="Background Color">
+      </div>
+      <div class="sliders">
+        <label class="font_size_label">
+          Font <span>(60)</span>:&nbsp;
+          <div class="font_size slider"></div>
+        </label><br>
+        <label class="speed_label">
+          Speed <span>(35)</span>:&nbsp;
+          <div class="speed slider"></div>
+        </label>
+      </div>
+      <div class="buttons">
+        <button class="button small icon-tablet remote" aria-label="Remote Control" title="Remote Control"></button>
+        <button class="button small icon-eye-close dim-controls" aria-label="Dim While Reading" title="Dim While Reading"></button>
+        <button class="button small icon-undo reset" aria-label="Reset TelePrompter" title="Reset TelePrompter"></button>
+        <button class="button small icon-text-width flip-x" aria-label="Flip Text Horizontally" title="Flip Text Horizontally"></button>
+        <button class="button small icon-text-height flip-y" aria-label="Flip Text Vertically" title="Flip Text Vertically"></button>
+        <button class="button icon-play play active" aria-label="Play / Pause" title="Play / Pause TelePrompter"></button>
+      </div>
+    </nav>
+  </header>
+  <article>
+    <div class="overlay">
+      <div class="top"></div>
+      <div class="bottom"></div>
+    </div>
+    <div class="teleprompter" id="teleprompter" contenteditable>
+      Oh, hello there. I did not see you come in. I was too busy reading off this TelePrompter. It does some pretty cool
+      things, for example:
+      <br><br>
+      You can edit the text right on the page. It'll even save it for you if you happen to leave the page. That's some
+      smart thinking.
+      <br><br>
+      If you're using an iPad, you can add a shortcut to your home screen for full screen awesomeness.
+      <br><br>
+      You can also use some handy keyboard shortcuts to speed things up. You can adjust the speed and font size at the
+      top right as well. We're also experimenting with ways to flip the text around for you fancy folks using mirrors.
+      <br><br>
+      The keyboard shortcuts are as follows:
+      <br><br>
+      Up: Increases Font Size
+      <br><br>
+      Down: Decreases Font Size
+      <br><br>
+      Left: Slows Down Teleprompter
+      <br><br>
+      Right: Speeds Up Teleprompter
+      <br><br>
+      Space: Starts / Stops Teleprompter
+      <br><br>
+      Escape: Resets Everything
+      <br><br>
+      Finally, we also made an effort to make sure your text will be easy to read. So if you are pasting text from a
+      Microsoft Word document, we'll do some cleaning up to make the breaks flow more easily.
+      <br><br>
+      Thanks for stopping by.
+    </div>
+    <i class="icon-play marker" style="display: none"></i>
+  </article>
+
+  <script>
+    (function(d, s, id) {
+      var js, tjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) {
+        return;
+      }
+      js = d.createElement(s);
+      js.id = id;
+      js.src = (window.location.hostname === 'promptr.tv') ?
+        'https://promptr.tv/remote/socket.io/socket.io.js' :
+        'http://' + window.location.hostname + ':3000/socket.io/socket.io.js';
+      tjs.parentNode.insertBefore(js, tjs);
+    }(document, 'script', 'teleprompter-socket'));
+
+  </script>
+
+  <script src="js/plugins.js?v=1.2.0"></script>
+  <script src="js/script.js?v=1.2.0"></script>
+</body>
+
 </html>
