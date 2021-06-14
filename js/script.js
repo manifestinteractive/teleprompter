@@ -268,7 +268,8 @@
    */
   function handleRemote() {
     if (!socket && !remote) {
-      remoteConnect();
+      var currentRemote = storage.get('remote-id');
+      remoteConnect(currentRemote);
     } else {
       $remoteModal.css('display', 'flex');
     }
@@ -513,12 +514,13 @@
 
     socket.on('disconnect', function() {
       $buttonRemote.removeClass('active');
-      storage.set('remote-id', null);
+      //storage.set('remote-id', null);
     });
 
     socket.on('connectedToRemote', function() {
       storage.set('remote-id', remote);
       $buttonRemote.addClass('active');
+      socket.emit('clientCommand', 'updateConfig', config);
     });
 
     socket.on('remoteControl', function(command, value) {
@@ -911,18 +913,10 @@
 
     $('p:empty', $teleprompter).remove();
 
-    // Connect to Remote if Provided
-    var currentRemote = storage.get('remote-id');
-
-    if (currentRemote && currentRemote.length === 6) {
-      remoteConnect(currentRemote);
-    }
-
     $teleprompter.addClass('ready');
 
     // TODO: Pull URL Params on Page Load and Update UI & Local Storage
     // TODO: Add Version Update Modal to show Changes to Existing / New Users ( track with version number in Local Storage )
-    // TODO: Look into why refreshing the Teleprompter Disconnects the Remote ( that should not happen )
     // TODO: Update Favicon and Apple Icons for Teleprompter ( but leave Remotes as is )
     // TODO: Address Responsive Layout Issues
     // TODO: Listen for Manual Page Scroll and update Config
@@ -933,9 +927,14 @@
     // TODO: Optimize CSS & JS ( remove lingering console statements )
     // TODO: Make sure pasting from Word still works like it used to
     // TODO: Add Changelog to Repo
+    // FIXED: Look into why refreshing the Teleprompter Disconnects the Remote ( that should not happen )
 
-    if (socket && remote) {
-      socket.emit('clientCommand', 'updateConfig', config);
+    // Connect to Remote if Provided
+    var currentRemote = storage.get('remote-id');
+    if (currentRemote && currentRemote.length === 6) {
+      setTimeout(function(){
+        remoteConnect(currentRemote);
+      }, 1000);
     }
   });
 })();
