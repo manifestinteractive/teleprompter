@@ -386,7 +386,7 @@
   /**
    * Manage Scrolling Teleprompter
    */
-  function pageScroll(direction) {
+  function pageScroll() {
     var offset = 1;
     var animate = 0;
 
@@ -397,18 +397,12 @@
       return;
     }
 
-    if (!direction) {
-      direction = 'down'
-      clearTimeout(scrollDelay);
-      scrollDelay = setTimeout(pageScroll, Math.floor(50 - config.pageSpeed));
-    } else {
-      offset = window.screen.availHeight / 2;
-      animate = 500;
-    }
+    clearTimeout(scrollDelay);
+    scrollDelay = setTimeout(pageScroll, Math.floor(50 - config.pageSpeed));
 
     if ($teleprompter.hasClass('flip-y')) {
       $article.stop().animate({
-        scrollTop: (direction === 'down') ? '-=' + offset + 'px' : '+=' + offset + 'px'
+        scrollTop: '-=' + offset + 'px'
       }, animate, 'linear', function() {
         $article.clearQueue();
       });
@@ -426,7 +420,7 @@
       }
     } else {
       $article.stop().animate({
-        scrollTop: (direction === 'down') ? '+=' + offset + 'px' : '-=' + offset + 'px'
+        scrollTop: '+=' + offset + 'px'
       }, animate, 'linear', function() {
         $article.clearQueue();
       });
@@ -931,6 +925,7 @@
     // TODO: Look into why refreshing the Teleprompter Disconnects the Remote ( that should not happen )
     // TODO: Update Favicon and Apple Icons for Teleprompter ( but leave Remotes as is )
     // TODO: Address Responsive Layout Issues
+    // TODO: Listen for Manual Page Scroll and update Config
     // TODO: Remove Unused Code
     // TODO: Perform Accessibility Tests for UI, Keyboard Navigation & Screen Readers
     // TODO: Update Third Party Libraries ( if easy )
