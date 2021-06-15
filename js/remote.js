@@ -26,20 +26,6 @@
   /* Custom App Settings */
   var config = Object.assign({}, defaultConfig);
 
-  /* Local Storage Wrapper */
-  var storage = {
-    get: function(key) {
-      if (typeof localStorage !== 'undefined' && localStorage[key]) {
-        return localStorage[key];
-      }
-    },
-    set: function(key, val) {
-      if (typeof localStorage !== 'undefined') {
-        localStorage.setItem(key, val);
-      }
-    }
-  };
-
   window.onload = function() {
     var $control = document.getElementById('remote-control');
     var $dim = document.getElementById('button-dim');
@@ -57,7 +43,7 @@
     var $slower = document.getElementById('button-slower');
     var $up = document.getElementById('button-up');
 
-    var currentRemote = storage.get('remote-id');
+    var currentRemote = localStorage.getItem('teleprompter_remote_id');
     var urlParamID = getRemoteId();
 
     if (urlParamID) {
@@ -223,12 +209,15 @@
     $up.addEventListener('click', handleUpPress, false);
 
     function getUrlVars() {
+      var paramCount = 0;
       var vars = {};
-      window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m, key,
-        value) {
+
+      window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m, key, value) {
+        paramCount++;
         vars[key] = value;
       });
-      return vars;
+
+      return (paramCount > 0) ? vars : null;
     }
 
     function getRemoteId() {
@@ -367,7 +356,7 @@
         $setup.style.display = 'none';
         $control.style.display = 'flex';
 
-        storage.set('remote-id', remote);
+        localStorage.setItem('teleprompter_remote_id', remote);
         document.getElementById('remote-id').innerHTML = remote.replace('REMOTE_', 'REMOTE:&nbsp; ');
 
         $input.value = '';
@@ -414,7 +403,7 @@
       socket = null;
       remote = null;
 
-      storage.set('remote-id', null);
+      localStorage.removeItem('teleprompter_remote_id');
 
       $setup.style.display = 'flex';
       $control.style.display = 'none';

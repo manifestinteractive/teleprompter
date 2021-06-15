@@ -8,18 +8,23 @@
   <title>TelePrompter</title>
 
   <meta name="author" content="Peter Schmalfeldt">
-  <meta name="description" content="HTML5, CSS3 and JavaScript-Based TelePrompter">
+  <meta name="description" content="Open Source TelePrompter">
   <meta name="keywords" content="TelePrompter, HTML, HTML5, CSS, CSS3, JavaScript">
 
   <!-- Mobile Specific Meta Tags -->
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
-  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800,300' rel='stylesheet' type='text/css'>
-  <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.3/themes/redmond/jquery-ui.css" />
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link rel="preconnect" href="https://code.jquery.com">
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap">
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/redmond/jquery-ui.min.css" />
   <link rel="stylesheet" href="css/style.css?v=1.2.0">
   <link rel="stylesheet" href="css/font-awesome.min.css">
+
+  <link rel="preload" href="font/fontawesome-webfont.woff?v=3.2.1" as="font" type="font/woff2" crossorigin>
 
   <link href="favicon.ico" rel="shortcut icon">
   <link rel="apple-touch-icon-precomposed" href="img/apple/icon-57x57.png" />
@@ -125,6 +130,7 @@
 
   </script>
 
+  <script>var TELEPROMPTER_VERSION = '1.2.0';</script>
   <script src="js/plugins.js?v=1.2.0"></script>
   <script src="js/script.js?v=1.2.0"></script>
 </body>
