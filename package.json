@@ -1,7 +1,7 @@
 {
   "name": "teleprompter",
   "version": "1.2.0",
-  "description": "Teleprompter https://promptr.tv",
+  "description": "Browser-based TelePrompter with Remote Control",
   "homepage": "https://github.com/manifestinteractive/teleprompter",
   "license": "MIT",
   "keywords": [

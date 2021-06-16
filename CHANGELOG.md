@@ -21,6 +21,9 @@ v1.2.0 Release Notes ( June 30th, 2021 )
 - [X] Added missing Text Rotation buttons to the Remote so now all the buttons on the TelePrompter also exist on the Remote.
 - [X] Made TelePrompter and Remote ADA Compliant.  Failed pretty horribly to do this in prior releases, but it's now been tested for Visual Impairment Issues, Keyboard Navigation Support & Screen Reader Access.
 - [X] Added Better Text Readability in Browser
+- [X] Added Software Update Modal to announce software updates for users that have already used the app ( only shown once per new release )
+- [X] Updated App Icons
+- [X] Added Service Worker so TelePrompter can be installed as a Browser App
 
 ### Bug Fixes
 

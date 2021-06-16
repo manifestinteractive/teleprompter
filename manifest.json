@@ -1,0 +1,32 @@
+{
+  "app_name": "TelePrompter",
+  "background_color": "#141414",
+  "description": "Browser-based TelePrompter with Remote Control",
+  "display": "standalone",
+  "icons": [
+      {
+          "sizes": "192x192",
+          "src": "assets/img/icon-192x192.png",
+          "type": "image/png"
+      },
+      {
+          "sizes": "256x256",
+          "src": "assets/img/icon-256x256.png",
+          "type": "image/png"
+      },
+      {
+          "sizes": "384x384",
+          "src": "assets/img/icon-384x384.png",
+          "type": "image/png"
+      },
+      {
+          "sizes": "512x512",
+          "src": "assets/img/icon-512x512.png",
+          "type": "image/png"
+      }
+  ],
+  "name": "TelePrompter",
+  "short_name": "TelePrompter",
+  "start_url": "./?utm_source=web_app_manifest",
+  "theme_color": "#4297d7"
+}

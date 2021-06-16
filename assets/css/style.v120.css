@@ -246,7 +246,7 @@ input[type="color"]::-webkit-color-swatch {
   border: none;
 }
 
-.remote-modal {
+#modal {
   position: absolute;
   top: 0;
   left: 0;
@@ -258,6 +258,40 @@ input[type="color"]::-webkit-color-swatch {
   justify-content: center;
   overflow: hidden;
   display: none;
+}
+
+#remote-control-modal, #software-update {
+  display: none;
+}
+
+#software-update {
+  display: block;
+  background: #FFF;
+  padding: 20px;
+  border-radius: 8px;
+  color: #000;
+}
+
+#software-update p {
+  text-align: left;
+  margin: 10px 0 20px 0;
+}
+
+#software-update a {
+  text-transform: uppercase;
+  color: #FFF;
+  text-decoration: none;
+  background: #000;
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 14px;
+  display: inline-block;
+  transition: background-color 0.25s;
+}
+
+#software-update a:hover {
+  background-color: #4297d7;
 }
 
 .modal-overlay {
@@ -272,7 +306,8 @@ input[type="color"]::-webkit-color-swatch {
 
 .modal-content {
   z-index: 5002;
-  max-width: 50%;
+  width: 50%;
+  max-width: 400px;
   text-align: center;
 }
 

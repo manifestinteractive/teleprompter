@@ -1,18 +1,26 @@
-Teleprompter
+TelePrompter
 ===
 
-You can edit the text right on the page. It'll even save your changes for you if you happen to leave the page.
+> Browser-based TelePrompter with Remote Control
 
-If you're using an iPad, you can add a shortcut to your home screen for full screen awesomeness.
+![Screenshot](assets/img/social-card.png "Screenshot")
 
-You can also use some handy keyboard shortcuts. You can adjust the speed & font size at the top right as well. I'm also experimenting with ways to flip the text around for you fancy folks using mirrors.
+Features
+---
 
-[![Buy Me Coffee](https://peterschmalfeldt.com/buy-me-coffee.png)](https://www.paypal.me/manifestinteractive)
+- [X] Edit Text in Browser
+- [X] Changes Saved Automatically
+- [X] Handy Keyboard Shortcuts
+- [X] Advanced Controls
+- [X] Remote Control Support
 
-## Now Available @ [https://promptr.tv](https://promptr.tv) ##
+Let's Go
+---
 
+[![Launch](https://img.shields.io/badge/Launch_TelePrompter-blue.svg?logo=azure-data-explorer&style=for-the-badge&logoColor=white)](https://promptr.tv)
 
-## Keyboard Shortcuts ##
+Keyboard Shortcuts
+---
 
 Key              | Alternatives                            | Description
 :---------------:|:---------------------------------------:|:--------------------------
@@ -26,3 +34,7 @@ Key              | Alternatives                            | Description
 We also made an effort to make sure your text will be easy to read.   So if you are pasting text from a word document, we'll do some cleaning up to make the breaks flow more easily.
 
 Follow me on Twitter for updates: **[@mrmidi](http://twitter.com/mrmidi "Follow @mrmidi on Twitter")**
+
+#### Do you use this TelePrompter?
+
+[![Buy Me Coffee](https://peterschmalfeldt.com/buy-me-coffee.png)](https://www.paypal.me/manifestinteractive)

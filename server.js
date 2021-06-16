@@ -10,9 +10,7 @@ var io = require('socket.io')(http, {
 });
 
 app.use(cors({ origin: '*' }));
-app.use('/css', express.static(path.join(__dirname, 'css')))
-app.use('/font', express.static(path.join(__dirname, 'font')));
-app.use('/img', express.static(path.join(__dirname, 'img')));
+app.use('/assets', express.static(path.join(__dirname, 'assets')));
 
 app.get('/', function(req, res) {
   res.sendFile(__dirname + '/remote.html');
