@@ -5,10 +5,10 @@ TelePrompter - Change Log
 
 ![icon](assets/img/icon-256x256.png "icon")
 
-v1.2.0 Release Notes ( June 30th, 2021 )
+:white_check_mark: v1.2.0 Release Notes ( June 30th, 2021 )
 ---
 
-### New Features
+### :tada:  New Features
 
 - [X] Made TelePrompter and Remote ADA Compliant.  Failed pretty horribly to do this in prior releases, but it's now been tested for Visual Impairment Issues, Keyboard Navigation Support & Screen Reader Access.
 - [X] Updated Layout to work on Desktop, Tablet & Mobile Screen Sizes
@@ -29,7 +29,7 @@ v1.2.0 Release Notes ( June 30th, 2021 )
 - [X] Updated Remote Server to enable CORS for Modern Browsers
 - [X] Updated App Icons
 
-### Bug Fixes
+### :warning:  Bug Fixes
 
 - [X] Using the Escape Key while editing the TelePrompter will exit editing the TelePrompter.  This was called out by [aaronpk](https://github.com/aaronpk) in [PR #16](https://github.com/manifestinteractive/teleprompter/pull/16) and was also a reported bug in [Issue #15](https://github.com/manifestinteractive/teleprompter/issues/15)
 - [X] Fixed Zero Speed Bug in [Issue #12](https://github.com/manifestinteractive/teleprompter/issues/12) where if you had set the speed to zero, it still moved.  Special thanks to [donniebreve](https://github.com/donniebreve) for contributing the fix to this in [PR #19](https://github.com/manifestinteractive/teleprompter/pull/19)
@@ -39,18 +39,18 @@ v1.2.0 Release Notes ( June 30th, 2021 )
 - [X] Fixed rendering glitch when browser first loads when there are custom settings that were being applied just after page load, causing it to jump around a bit.
 - [X] Heavily Refactored to improve Performance
 
-v1.1.1 Release Notes ( April 28th, 2020 )
+:white_check_mark: v1.1.1 Release Notes ( April 28th, 2020 )
 ---
 
 - [X] Fixed Text Transform bug for [Issue #21](https://github.com/manifestinteractive/teleprompter/issues/21)
 
-v1.1.0 Release Notes ( June 29th, 2019 )
+:white_check_mark: v1.1.0 Release Notes ( June 29th, 2019 )
 ---
 
 - [X] Added Remote Control to allow managing TelePrompter from an external device
 - [X] Switched over to using Local Storage rather than depending on Cookies ( kept fallback support for old cookies )
 
-v1.0.0 Release Notes ( February 16th, 2015 )
+:white_check_mark: v1.0.0 Release Notes ( February 16th, 2015 )
 ---
 
-:tada: Initial Release
+:tada: - Initial Release
