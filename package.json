@@ -1,38 +1,42 @@
 {
-    "name": "teleprompter",
-    "version": "1.1.1",
-    "description": "Teleprompter https://promptr.tv",
-    "homepage": "https://github.com/manifestinteractive/teleprompter",
-    "license": "MIT",
-    "keywords": [
-        "teleprompter"
-    ],
-    "contributors": [
-        {
-            "name": "Peter Schmalfeldt",
-            "email": "me@peterschmalfeldt.com",
-            "url": "peterschmalfeldt.com"
-        }
-    ],
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/manifestinteractive/teleprompter.git"
-    },
-    "bugs": {
-        "url": "https://github.com/manifestinteractive/teleprompter/issues"
-    },
-    "scripts": {
-        "start": "forever start -w --minUptime 1000 --spinSleepTime 1000 -m 1 -l server.log --append -o ./server-stdout.log -e ./server-stderr.log server.js",
-        "stop": "forever stop -w --minUptime 1000 --spinSleepTime 1000 -m 1 -l server.log --append -o ./server-stdout.log -e ./server-stderr.log server.js",
-        "client": "http-server --cors -p 8080 -o",
-        "server": "node server.js"
-    },
-    "dependencies": {
-        "express": "^4.17.1",
-        "forever": "^1.0.0",
-        "socket.io": "^2.2.0"
-    },
-    "devDependencies": {
-        "http-server": "^0.11.1"
+  "name": "teleprompter",
+  "version": "1.2.0",
+  "description": "Browser-based TelePrompter with Remote Control",
+  "homepage": "https://github.com/manifestinteractive/teleprompter",
+  "license": "MIT",
+  "keywords": [
+    "teleprompter"
+  ],
+  "contributors": [
+    {
+      "name": "Peter Schmalfeldt",
+      "email": "me@peterschmalfeldt.com",
+      "url": "peterschmalfeldt.com"
     }
+  ],
+  "engines": {
+    "node": ">= 12.12.0",
+    "npm": ">= 6.13.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/manifestinteractive/teleprompter.git"
+  },
+  "bugs": {
+    "url": "https://github.com/manifestinteractive/teleprompter/issues"
+  },
+  "scripts": {
+    "start": "forever start -w --minUptime 1000 --spinSleepTime 1000 -m 1 -l server.log --append -o ./server-stdout.log -e ./server-stderr.log server.js",
+    "stop": "forever stop -w --minUptime 1000 --spinSleepTime 1000 -m 1 -l server.log --append -o ./server-stdout.log -e ./server-stderr.log server.js",
+    "client": "http-server --cors -p 8080 -o",
+    "server": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "forever": "^4.0.0",
+    "socket.io": "^4.1.2"
+  },
+  "devDependencies": {
+    "http-server": "^0.12.3"
+  }
 }

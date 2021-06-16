@@ -1,394 +1,102 @@
 <!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
+  <head>
+    <meta charset="utf-8">
+    <title>Teleprompter Remote</title>
 
-        <title>Teleprompter Remote</title>
+    <!-- Mobile Specific Meta Tags -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Remote">
+    <meta name="application-name" content="Remote">
+    <meta name="robots" content="noindex,nofollow">
 
-        <!-- Mobile Specific Meta Tags -->
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="apple-mobile-web-app-capable" content="yes">
-        <meta name="apple-mobile-web-app-status-bar-style" content="black">
-        <meta name="apple-mobile-web-app-title" content="Remote">
-        <meta name="application-name" content="Remote">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
 
-        <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800,300' rel='stylesheet' type='text/css'>
-        <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap">
+    <link rel="stylesheet" href="assets/css/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/css/remote.v120.css">
 
-        <link rel="apple-touch-icon-precomposed" href="img/apple/icon-57x57.png" />
-        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="img/apple/icon-72x72.png" />
-        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="img/apple/icon-114x114.png" />
-        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="img/apple/icon-144x144.png" />
+    <link rel="preload" href="assets/font/fontawesome-webfont.woff?v=3.2.1" as="font" type="font/woff2" crossorigin>
 
-        <style>
-        html, body {
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-        }
-        body {
-            background-color: #141414;
-            font-family: 'Open Sans', sans-serif;
-            color: #fff;
-            padding: 0;
-            margin: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-        }
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="apple-touch-icon" sizes="192x192" href="assets/img/apple/icon-192x192.png" />
+  </head>
+  <body>
+    <div id="remote-setup" class="remote-wrapper">
+      <div>
+        <p><input type="text" class="remote-id" name="remote-id" maxlength="6" placeholder="ABC123" onfocus="this.placeholder=''" onblur="this.placeholder='ABC123'" required /></p>
+        <p>Enter Remote ID to Connect</p>
+      </div>
 
-        .remote-wrapper {
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-        }
+      <div class="footer text-center">
+        TELEPROMPTER
+      </div>
+    </div>
 
-        #remote-control {
-            display: none;
-        }
+    <div id="remote-control" class="remote-wrapper">
+      <div class="header">
+        <button class="button small icon-eye-close dim-controls" id="button-dim" aria-label="Dim While Reading" title="Dim While Reading"></button>
+        <button class="button small icon-undo reset" id="button-reset" aria-label="Reset TelePrompter" title="Reset TelePrompter"></button>
+        <button class="button small icon-text-width flip-x" id="button-flip-x" aria-label="Flip Text Horizontally" title="Flip Text Horizontally"></button>
+        <button class="button small icon-text-height flip-y" id="button-flip-y" aria-label="Flip Text Vertically" title="Flip Text Vertically"></button>
+        <button class="button small icon-off power" id="button-power" aria-label="Disconnect Remote" title="Disconnect Remote"></button>
+      </div>
 
-        #remote-setup p {
-            width: 100%;
-            display: block;
-            text-align: center;
-            font-weight: 300;
-        }
+      <div class="clock-wrapper">
+        <i class="icon icon-bullhorn"></i>&nbsp;
+        <span class="clock" id="current-time">00:00:00</span>
+      </div>
 
-        #remote-setup .footer {
-            opacity: 0.5;
-        }
-
-        .remote-id {
-            background-color: #141414;
-            border: none;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.25);
-            width: 240px;
-            font-size: 40px;
-            color: #4297d7;
-            margin: 0 auto;
-            padding: 10px;
-            text-align: center;
-            display: block;
-            text-transform: uppercase;
-            transition: border 0.5s;
-        }
-
-        .remote-id:focus {
-            outline: none;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.5);
-        }
-
-        .remote-id.error, .remote-id.error:focus {
-            border-bottom: 1px solid rgba(255, 0, 0, 1);
-        }
-
-        .remote-id.success, .remote-id.success:focus {
-            border-bottom: 1px solid #4297d7;
-        }
-
-        .remote {
-            max-width: 300px;
-            height: 330px;
-            width: 100%;
-            position: fixed;
-            overflow: hidden;
-        }
-
-        .header {
-            position: fixed;
-            top: 40px;
-            max-width: 300px;
-            width: 100%;
-            margin: 0 auto;
-        }
-
-        .footer {
-            position: fixed;
-            bottom: 40px;
-            max-width: 300px;
-            width: 100%;
-            margin: 0 auto;
-            font-weight: 300;
-        }
-
-        a.button {
-            color: #FFF;
-            font-size: 30px;
-            -webkit-tap-highlight-color: rgba(0,0,0,0);
-            cursor: pointer;
-        }
-
-        a.button.reset {
-            position: absolute;
-            right: 50px;
-            top: 0;
-        }
-
-        a.button.power {
-            position: absolute;
-            right: 0;
-            top: 0;
-        }
-
-        a.button.play {
-            font-size: 80px;
-            margin: 60px;
-            width: 70px;
-            height: 70px;
-            text-align: center;
-            line-height: 70px;
-        }
-
-        a.button.up, a.button.down, a.button.plus, a.button.minus {
-            font-size: 60px;
-        }
-
-        .text-center {
-            text-align: center;
-            white-space: nowrap;
-        }
-        </style>
-    </head>
-    <body>
-        <div id="remote-setup" class="remote-wrapper">
-            <div>
-                <p><input type="text" class="remote-id" name="remote-id" maxlength="6" placeholder="ABC123" onfocus="this.placeholder=''" onblur="this.placeholder='ABC123'" required /></p>
-                <p>Enter Remote ID to Connect</p>
-            </div>
-
-            <div class="footer text-center">
-                TELEPROMPTER
-            </div>
+      <div class="remote">
+        <div class="text-center">
+          <button class="button icon-chevron-up up" id="button-up" aria-label="" title=""></button>
         </div>
 
-        <div id="remote-control" class="remote-wrapper">
-            <div class="header">
-                <div class="clock-wrapper">
-                    <i class="icon icon-bullhorn"></i>&nbsp;
-                    <span class="clock" id="current-time">00:00:00</span>
-                </div>
-
-                <a class="button small icon-undo reset" id="button-reset" href="javascript:void(0)" onclick="return false;"></a>
-                <a class="button small icon-off power" id="button-power" href="javascript:void(0)" onclick="return false;"></a>
-            </div>
-
-            <div class="remote">
-                <div class="text-center">
-                    <a class="button icon-chevron-up up" id="button-up" href="javascript:void(0)" onclick="return false;"></a>
-                </div>
-
-                <div class="text-center">
-                    <a class="button icon-minus minus" id="button-slower" href="javascript:void(0)" onclick="return false;"></a>
-                    <a class="button icon-play play" id="button-play" href="javascript:void(0)" onclick="return false;"></a>
-                    <a class="button icon-plus plus" id="button-faster" href="javascript:void(0)" onclick="return false;"></a>
-                </div>
-
-                <div class="text-center">
-                    <a class="button icon-chevron-down down" id="button-down" href="javascript:void(0)" onclick="return false;"></a>
-                </div>
-            </div>
-
-            <div class="footer text-center" id="remote-id"></div>
+        <div class="text-center">
+          <button class="button icon-minus minus" id="button-slower" aria-label="" title=""></button>
+          <button class="button icon-play play" id="button-play" aria-label="" title=""></button>
+          <button class="button icon-plus plus" id="button-faster" aria-label="" title=""></button>
         </div>
 
-        <script src="https://promptr.tv/remote/socket.io/socket.io.js"></script>
-        <script>
-        (function () {
-            var socket, remote, remoteIO;
+        <div class="text-center">
+          <button class="button icon-chevron-down down" id="button-down" aria-label="" title=""></button>
+        </div>
+      </div>
 
-            var config = {
-                get: function(key) {
-                    if (typeof localStorage !== 'undefined' && localStorage[key]) {
-                        return localStorage[key];
-                    }
-                },
-                set: function(key, val) {
-                    if (typeof localStorage !== 'undefined') {
-                        localStorage.setItem(key, val);
-                    }
-                }
-            };
+      <div class="quick-slider">
+        <select id="slider-select">
+          <option value="font">Font</option>
+          <option value="scroll">Scroll</option>
+          <option value="speed" selected>Speed</option>
+        </select>
+        <input type="range" min="0" max="50" value="50" class="slider" id="slider">
+      </div>
 
-	        window.onload = function() {
-                const setup = document.getElementById('remote-setup');
-                const control = document.getElementById('remote-control');
-                const reset = document.getElementById('button-reset');
-                const power = document.getElementById('button-power');
-                const up = document.getElementById('button-up');
-                const slower = document.getElementById('button-slower');
-                const play = document.getElementById('button-play');
-                const faster = document.getElementById('button-faster');
-                const down = document.getElementById('button-down');
-                const input = document.getElementsByClassName('remote-id')[0];
+      <div class="footer text-center" id="remote-id"></div>
+    </div>
 
-                var currentRemote = config.get('remote-id');
-                var urlParamID = getRemoteId();
+    <script>
+      (function(d, s, id) {
+        var js, tjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {
+          return;
+        }
+        js = d.createElement(s);
+        js.id = id;
+        js.src = (window.location.hostname === 'promptr.tv') ? 'https://promptr.tv/remote/socket.io/socket.io.js' :
+          'http://' + window.location.hostname + ':3000/socket.io/socket.io.js';
+        tjs.parentNode.insertBefore(js, tjs);
+      }(document, 'script', 'teleprompter-socket'));
 
-                if (urlParamID) {
-                    remote = 'REMOTE_' + urlParamID.toUpperCase();
-                    clientConnect(remote);
-                } else if (currentRemote && currentRemote.length === 13) {
-                    remote = currentRemote;
-                    clientConnect(remote);
-                }
-
-                input.addEventListener('keyup', function(e) {
-                    input.classList.remove('error');
-                    input.classList.remove('success');
-
-                    if (e.keyCode == 13) {
-                        handleInput();
-                    }
-                });
-
-                document.addEventListener('focusout', function(e){
-                    if (!socket && !remote) {
-                        handleInput();
-                    }
-                });
-
-                /* Reset Button */
-                reset.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    if (socket && remote) {
-                        socket.emit('sendRemoteControl', 'reset');
-                    }
-                });
-
-                /* Power Button */
-                power.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    if (socket && remote) {
-                        socket.emit('sendRemoteControl', 'power');
-                        clientDisconnect();
-                    }
-                });
-
-                /* Scroll Up Button */
-                up.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    if (socket && remote) {
-                        socket.emit('sendRemoteControl', 'up');
-                    }
-                });
-
-                /* Slower Button */
-                slower.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    if (socket && remote) {
-                        socket.emit('sendRemoteControl', 'slower');
-                    }
-                });
-
-                /* Play Button */
-                play.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    if (socket && remote) {
-                        socket.emit('sendRemoteControl', 'play');
-                    }
-                });
-
-                /* Faster Button */
-                faster.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    if (socket && remote) {
-                        socket.emit('sendRemoteControl', 'faster');
-                    }
-                });
-
-                /* Scroll Down Button */
-                down.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    if (socket && remote) {
-                        socket.emit('sendRemoteControl', 'down');
-                    }
-                });
-
-                function getUrlVars() {
-                    var vars = {};
-                    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
-                        vars[key] = value;
-                    });
-                    return vars;
-                }
-
-                function getRemoteId() {
-                    if(window.location.href.indexOf('id') > -1){
-                        return getUrlVars()['id'];
-                    }
-
-                    return null;
-                }
-
-                function handleInput() {
-                    if (input.value && input.value.length === 6) {
-                        input.blur();
-                        input.classList.add('success');
-                        remote = 'REMOTE_' + input.value.toUpperCase();
-                        clientConnect(remote);
-                    } else {
-                        input.classList.add('error');
-                    }
-                }
-
-                function clientConnect(remote) {
-                    socket = io.connect('https://promptr.tv', { path: '/remote/socket.io' });
-
-                    socket.on('connect', function() {
-                        socket.emit('connectToRemote', remote);
-                    });
-
-                    socket.on('connectedToRemote', function (id) {
-                        setup.style.display = 'none';
-                        control.style.display = 'flex';
-
-                        config.set('remote-id', remote);
-                        document.getElementById('remote-id').innerHTML = remote.replace('REMOTE_', 'REMOTE:&nbsp; ');
-
-                        input.value = '';
-                        input.classList.remove('error');
-                        input.classList.remove('success');
-
-                        socket.emit('sendRemoteControl', 'hideModal');
-                    });
-
-                    socket.on('clientCommand', function (command, value) {
-                        switch (command) {
-                            case 'play':
-                                play.classList.remove('icon-play');
-                                play.classList.add('icon-pause');
-                                break;
-
-                            case 'stop':
-                                play.classList.remove('icon-pause');
-                                play.classList.add('icon-play');
-                                break;
-
-                            case 'updateTime':
-                                document.getElementById('current-time').innerHTML = value;
-                                break;
-                        }
-                    });
-                };
-
-                function clientDisconnect() {
-                    socket.disconnect();
-
-                    socket = null;
-                    remote = null;
-
-                    config.set('remote-id', null);
-
-                    setup.style.display = 'flex';
-                    control.style.display = 'none';
-                };
-            };
-        })();
-        </script>
-    </body>
+    </script>
+    <script src="assets/js/remote.v120.js"></script>
+    <script>
+      // Initialize App
+      window.onload = function() {
+        TelePrompterRemote.init();
+      };
+    </script>
+  </body>
 </html>
