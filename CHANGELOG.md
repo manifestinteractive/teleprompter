@@ -5,7 +5,7 @@ TelePrompter - Change Log
 
 ![icon](assets/img/icon-256x256.png "icon")
 
-:white_check_mark: v1.2.0 Release Notes ( June 30th, 2021 )
+:white_check_mark: v1.2.0 Release Notes ( June 16th, 2021 )
 ---
 
 ### :tada:  New Features
