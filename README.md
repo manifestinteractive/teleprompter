@@ -14,10 +14,10 @@ Features
 - [X] Advanced Controls
 - [X] Remote Control Support
 
-Let's Go
+Free to Use
 ---
 
-Our Open Source TelePrompter is available, and free to use, on our Website:
+Our Open Source TelePrompter is Available Online:
 
 [![Launch](https://img.shields.io/badge/Launch_TelePrompter-blue.svg?logo=azure-data-explorer&style=for-the-badge&logoColor=white)](https://promptr.tv)
 
