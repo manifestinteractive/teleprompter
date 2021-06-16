@@ -5,7 +5,7 @@ TelePrompter - Change Log
 
 ![icon](assets/img/icon-256x256.png "icon")
 
-v1.2.0 ( June 30th, 2021 )
+v1.2.0 Release Notes ( June 30th, 2021 )
 ---
 
 ### New Features
@@ -39,18 +39,18 @@ v1.2.0 ( June 30th, 2021 )
 - [X] Fixed rendering glitch when browser first loads when there are custom settings that were being applied just after page load, causing it to jump around a bit.
 - [X] Heavily Refactored to improve Performance
 
-v1.1.1 ( April 28th, 2020 )
+v1.1.1 Release Notes ( April 28th, 2020 )
 ---
 
 - [X] Fixed Text Transform bug for [Issue #21](https://github.com/manifestinteractive/teleprompter/issues/21)
 
-v1.1.0 ( June 29th, 2019 )
+v1.1.0 Release Notes ( June 29th, 2019 )
 ---
 
 - [X] Added Remote Control to allow managing TelePrompter from an external device
 - [X] Switched over to using Local Storage rather than depending on Cookies ( kept fallback support for old cookies )
 
-v1.0.0 ( February 16th, 2015 )
+v1.0.0 Release Notes ( February 16th, 2015 )
 ---
 
-Initial Release
+:tada: Initial Release
