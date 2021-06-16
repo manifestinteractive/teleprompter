@@ -1,7 +1,10 @@
-Developer Setup
+TelePrompter - Developer Setup
 --
 
 > Want to run this on your own server?  If you have a server running node v12+, here is all you need to do:
+
+![icon](assets/img/icon-256x256.png "icon")
+
 
 #### Clone Repo
 
