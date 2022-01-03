@@ -76,7 +76,7 @@ docker compose build  # optional, if you have made code changes
 docker compose up
 ```
 
-These containers are good enough for development or use across a local network but are not hardened for production. If you intend to run them on the public Internet you should start by deploying them behind a reverse proxy as explained above
+These containers are good enough for development or use across a local network but are not hardened for production. If you intend to run them on the public internet you should start by deploying them behind a reverse proxy as explained above.
 
 Automated Control
 ---
