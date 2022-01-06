@@ -1,0 +1,202 @@
+html,
+body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  background-color: #141414;
+  font-family: 'Open Sans', sans-serif;
+  color: #fff;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.remote-wrapper {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+#remote-control {
+  display: none;
+}
+
+#remote-setup p {
+  width: 100%;
+  display: block;
+  text-align: center;
+  font-weight: 300;
+}
+
+#remote-setup .footer {
+  opacity: 0.5;
+}
+
+.clock-wrapper {
+  position: fixed;
+  top: 85px;
+  font-size: 24px;
+}
+
+.remote-id {
+  background-color: #141414;
+  border: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+  width: 240px;
+  font-size: 40px;
+  color: #4297d7;
+  margin: 0 auto;
+  padding: 10px;
+  text-align: center;
+  display: block;
+  text-transform: uppercase;
+  transition: border 0.5s;
+}
+
+.remote-id:focus {
+  outline: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.remote-id.error,
+.remote-id.error:focus {
+  border-bottom: 1px solid rgba(255, 0, 0, 1);
+}
+
+.remote-id.success,
+.remote-id.success:focus {
+  border-bottom: 1px solid #4297d7;
+}
+
+.remote {
+  max-width: 300px;
+  height: 330px;
+  width: 100%;
+  position: fixed;
+}
+
+.header {
+  position: fixed;
+  top: 40px;
+  max-width: 300px;
+  width: 100%;
+  text-align: center;
+}
+
+.header .button {
+  margin: 0 10px;
+}
+
+.footer {
+  position: fixed;
+  bottom: 30px;
+  max-width: 300px;
+  width: 100%;
+  margin: 0 auto;
+  font-weight: 300;
+}
+
+.button {
+  color: #FFF;
+  font-size: 30px;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  cursor: pointer;
+  appearance: none;
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin: 0;
+  outline-offset: -2px;
+}
+
+.button.active {
+  color: #4297d7;
+}
+
+.button.play {
+  font-size: 80px;
+  margin: 60px;
+  width: 70px;
+  height: 70px;
+  text-align: center;
+  line-height: 70px;
+}
+
+.button.up,
+.button.down,
+.button.plus,
+.button.minus {
+  font-size: 60px;
+}
+
+.text-center {
+  text-align: center;
+  white-space: nowrap;
+}
+
+.quick-slider {
+  max-width: 300px;
+  width: 100%;
+  position: fixed;
+  bottom: 75px;
+  margin: 0 auto;
+  font-weight: 300;
+  height: 55px;
+  text-align: center;
+}
+
+#slider-select {
+  background: transparent;
+  border: none;
+  color: #FFF;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  appearance: none;
+  -webkit-appearance: none;
+  background: transparent url("data:image/svg+xml;utf8,<svg viewBox='0 0 140 140' width='24' height='24' xmlns='http://www.w3.org/2000/svg'><g><path d='m121.3,34.6c-1.6-1.6-4.2-1.6-5.8,0l-51,51.1-51.1-51.1c-1.6-1.6-4.2-1.6-5.8,0-1.6,1.6-1.6,4.2 0,5.8l53.9,53.9c0.8,0.8 1.8,1.2 2.9,1.2 1,0 2.1-0.4 2.9-1.2l53.9-53.9c1.7-1.6 1.7-4.2 0.1-5.8z' fill='white'/></g></svg>") no-repeat;
+  background-position: right 0 top 3px;
+  padding-right: 12px;
+  background-size: 12px;
+  font-weight: 600;
+  font-size: 14px;
+  margin-left: 30px;
+}
+
+.slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 25px;
+  background: #333333;
+  border-radius: 4px;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  background: #FFF;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.slider::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  background: #FFF;
+  cursor: pointer;
+  border-radius: 4px;
+}

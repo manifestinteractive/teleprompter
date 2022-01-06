@@ -1,100 +1,211 @@
-<!DOCTYPE HTML>
-<html>
-	<head>
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-		<title>TelePrompter</title>
+    <title>TelePrompter</title>
 
-		<meta name="author" content="Peter Schmalfeldt">
-		<meta name="description" content="HTML5, CSS3 &amp; Javascript Based TelePrompter">
-		<meta name="keywords" content="TelePrompter, HTML, HTML5, CSS, CSS3, Javascript">
+    <!-- Mobile Specific Meta Tags -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="apple-mobile-web-app-title" content="TelePrompter" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="theme-color" content="#141414" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0,viewport-fit=cover" />
 
-		<!-- Mobile Specific Meta Tags -->
-		<meta name="viewport" content="width=1024, initial-scale=1, maximum-scale=1">
-		<meta name="apple-mobile-web-app-capable" content="yes">
-		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <!-- Default Meta Tags -->
+    <meta name="description" content="Browser-based TelePrompter with Remote Control">
+    <meta name="keywords" content="TelePrompter, Remote, Browser, Open Source">
+    <meta name="cache-control" content="public">
+    <meta name="company" content="Fatal Encounters">
+    <meta name="googlebot" content="index,follow">
+    <meta name="robots" content="noodp,noydir">
+    <meta name="robots" content="index,follow">
+    <meta name="author" content="Peter Schmalfeldt">
 
-		<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800,300' rel='stylesheet' type='text/css'>
-		<link rel="stylesheet" href="https://code.jquery.com/ui/1.10.3/themes/redmond/jquery-ui.css" />
-		<link rel="stylesheet" href="css/style.css?v=1.1.1">
-		<link rel="stylesheet" href="css/font-awesome.min.css">
-	</head>
-	<body id="gui">
-		<div class="remote-modal">
-			<a class="button icon-remove-circle close-modal" href="javascript:void(0)"></a>
-			<div class="modal-content">
-				<h1>Remote Control</h1>
-				<p>Access the Following URL from another device:</p>
-				<p class="remote-url">https://promptr.tv/remote</p>
-				<p>Enter this Remote ID:</p>
-				<p class="remote-id"></p>
-				<div id="qr-code"></div>
-				<p>Remote Control QR Code</p>
-			</div>
-			<div class="modal-overlay"></div>
-		</div>
+    <!-- Twitter META Info -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:site" content="@mrmidi">
+    <meta property="twitter:title" content="TelePrompter">
+    <meta property="twitter:description" content="Browser-based TelePrompter with Remote Control">
+    <meta property="twitter:creator" content="@mrmidi">
+    <meta property="twitter:image:src" content="https://promptr.tv/assets/img/social-card.png">
+    <meta property="twitter:domain" content="promptr.tv">
 
-		<header>
-			<h1><i class="icon icon-bullhorn"></i> <span class="clock">00:00:00</span></h1>
-			<nav>
-                <div class="buttons">
-					<a class="button small icon-tablet remote" href="#" onclick="return false;"></a>
-					<a class="button small icon-undo reset" href="#" onclick="return false;"></a>
-					<a class="button small icon-text-width flipx" href="#" onclick="return false;"></a>
-					<a class="button small icon-text-height flipy" href="#" onclick="return false;"></a>
-					<a class="button icon-play play active" href="#" onclick="return false;"></a>
-				</div>
-				<div class="sliders">
-					<label class="font_size_label">Font Size <span>(60)</span>:&nbsp; <div class="font_size slider"></div></label><br>
-					<label class="speed_label">Speed <span>(35)</span>:&nbsp; <div class="speed slider"></div></label>
-				</div>
-                <div class="colors">
-                    <input id="text-color-picker" class="color {hash:true,caps:true,valueElement:'text-color'}"><input type="hidden" id="text-color" value="#ffffff">
-                    <input id="background-color-picker" class="color {hash:true,caps:true,valueElement:'background-color'}"><input type="hidden" id="background-color" value="#141414">
-                </div>
-			</nav>
-		</header>
-		<article>
-			<div class="overlay">
-				<div class="top"></div>
-				<div class="bottom"></div>
-			</div>
-			<div class="teleprompter" id="teleprompter" contenteditable>
-				Oh, hello there. I did not see you come in. I was to busy reading off this TelePrompter. It does some pretty cool things, for example:
-				<br><br>
-				You can edit the text right on the page. It'll even save it for you if you happen to leave the page. That's some smart thinking.
-				<br><br>
-				If you're using an iPad, you can add a shortcut to your home screen for full screen awesomeness.
-				<br><br>
-				You can also use some handy keyboard shortcuts to speed things up. You can adjust the speed &amp; font size at the top right as well. We're also experimenting with ways to flip the text around for you fancy folks using mirrors.
-				<br><br>
-				The keyboard shortcuts are as  follows:
-				<br><br>
-				Up:  Increases Font Size
-				<br><br>
-				Down:  Decreases Font Size
-				<br><br>
-				Left:  Slows Down Teleprompter
-				<br><br>
-				Right:  Speeds Up Teleprompter
-				<br><br>
-				Space:  Starts / Stops Teleprompter
-				<br><br>
-				Escape: Resets Everything
-				<br><br>
-				Finally, we also made an effort to make sure your text will be easy to read. So if you are pasting text from a word document, we'll do some cleaning up to make the breaks flow more easily.
-				<br><br>
-				Thanks for Stopping by.
-			</div>
-			<i class="icon-play marker"></i>
-		</article>
-		<footer>
+    <!-- Open Graph protocol -->
+    <meta property="og:locale" content="en_US">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="TelePrompter">
+    <meta property="og:url" content="https://promptr.tv">
+    <meta property="og:image" content="https://promptr.tv/assets/img/social-card.png">
+    <meta property="og:site_name" content="TelePrompter">
+    <meta property="og:description" content="Browser-based TelePrompter with Remote Control">
 
-		</footer>
+    <!-- Dublin Core Metadata -->
+    <meta name="dc:language" content="en_US">
+    <meta name="dc:title" content="TelePrompter">
+    <meta name="dc:source" content="https://promptr.tv">
+    <meta name="dc:description" content="Browser-based TelePrompter with Remote Control">
 
-		<script src="https://promptr.tv/remote/socket.io/socket.io.js"></script>
-		<script src="js/plugins.js?v=1.1.1"></script>
-		<script src="js/script.js?v=1.1.1"></script>
-	</body>
+    <!-- Manifest -->
+    <link rel="manifest" href="manifest.json" />
+
+    <!-- Icons -->
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="apple-touch-icon" sizes="192x192" href="assets/img/apple/icon-192x192.png" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://promptr.tv" />
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/redmond/jquery-ui.min.css" />
+    <link rel="stylesheet" href="assets/css/style.v120.css">
+    <link rel="stylesheet" href="assets/css/font-awesome.min.css">
+
+    <!-- DNS Pre-Connects -->
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
+    <link rel="preconnect" href="https://code.jquery.com/" crossorigin />
+
+    <!-- Preload Assets -->
+    <link rel="preload" href="assets/font/fontawesome-webfont.woff?v=3.2.1" as="font" type="font/woff2" crossorigin>
+  </head>
+
+  <body id="gui">
+    <div id="modal">
+      <a class="button icon-remove-circle close-modal" href="javascript:void(0)" role="button" aria-label="Close Modal" title="Close Modal" data-ga data-category="Nav" data-action="Modal" data-label="Close Modal"></a>
+
+      <div class="modal-content">
+        <!-- Remote Control -->
+        <div id="remote-control-modal">
+          <h1>Remote Control</h1>
+          <p>Access the Following URL from another device:</p>
+          <p class="remote-url">https://promptr.tv/remote</p>
+          <p>Enter this Remote ID:</p>
+          <p class="remote-id"></p>
+          <div id="qr-code"></div>
+          <p>Remote Control QR Code</p>
+        </div>
+
+        <!-- Software Update -->
+        <div id="software-update">
+          <h1>Software Update</h1>
+          <p>Thanks for using <strong>TelePrompter</strong>. We just wanted to let you know that we have updated our site since the last time you visited.</p>
+          <a href="https://github.com/manifestinteractive/teleprompter/releases/latest" target="_blank" rel="nofollow noopener" data-ga data-category="Nav" data-action="Software Update" data-label="See Updates">See Updates</a>
+        </div>
+      </div>
+      <div class="modal-overlay"></div>
+    </div>
+
+    <header>
+      <h1><i class="icon icon-bullhorn"></i> <span class="clock">00:00:00</span></h1>
+      <nav>
+        <div class="colors" role="group" aria-label="Color Pickers">
+          <input type="color" id="text-color" value="#ffffff" aria-label="Text Color">
+          <input type="color" id="background-color" value="#141414" aria-label="Background Color">
+        </div>
+        <div class="sliders">
+          <label class="font_size_label" aria-label="Font Size">
+            Font <span>(60)</span>:&nbsp;
+            <div class="font_size slider"></div>
+          </label><br>
+          <label class="speed_label" aria-label="Page Speed">
+            Speed <span>(35)</span>:&nbsp;
+            <div class="speed slider"></div>
+          </label>
+        </div>
+        <div class="buttons" role="group" aria-label="TelePrompter Controls">
+          <button class="button small icon-tablet remote" aria-label="Remote Control" title="Remote Control" data-ga data-category="Nav" data-action="Control" data-label="Remote"></button>
+          <button class="button small icon-eye-close dim-controls" aria-label="Dim While Reading" title="Dim While Reading" data-ga data-category="Nav" data-action="Control" data-label="Dim"></button>
+          <button class="button small icon-undo reset" aria-label="Reset TelePrompter" title="Reset TelePrompter" data-ga data-category="Nav" data-action="Control" data-label="Reset"></button>
+          <button class="button small icon-text-width flip-x" aria-label="Flip Text Horizontally" title="Flip Text Horizontally" data-ga data-category="Nav" data-action="Control" data-label="FlipX"></button>
+          <button class="button small icon-text-height flip-y" aria-label="Flip Text Vertically" title="Flip Text Vertically" data-ga data-category="Nav" data-action="Control" data-label="FlipY"></button>
+          <button class="button icon-play play active" aria-label="Play / Pause" title="Play / Pause TelePrompter" data-ga data-category="Nav" data-action="Control" data-label="Play"></button>
+        </div>
+      </nav>
+    </header>
+    <article>
+      <div class="overlay">
+        <div class="top"></div>
+        <div class="bottom"></div>
+      </div>
+      <div class="teleprompter" id="teleprompter" role="textbox" aria-multiline="true" aria-label="TelePrompter Text" contenteditable>
+        Oh, hello there. I did not see you come in. I was too busy reading off this TelePrompter. It does some pretty cool
+        things, for example:
+        <br><br>
+        You can edit the text right on the page. It'll even save it for you if you happen to leave the page. That's some
+        smart thinking.
+        <br><br>
+        If you're using an iPad, you can add a shortcut to your home screen for full screen awesomeness.
+        <br><br>
+        You can also use some handy keyboard shortcuts to speed things up. You can adjust the speed and font size at the
+        top right as well. We're also experimenting with ways to flip the text around for you fancy folks using mirrors.
+        <br><br>
+        The keyboard shortcuts are as follows:
+        <br><br>
+        Up: Increases Font Size
+        <br><br>
+        Down: Decreases Font Size
+        <br><br>
+        Left: Slows Down Teleprompter
+        <br><br>
+        Right: Speeds Up Teleprompter
+        <br><br>
+        Space: Starts / Stops Teleprompter
+        <br><br>
+        Escape: Resets Everything
+        <br><br>
+        Finally, we also made an effort to make sure your text will be easy to read. So if you are pasting text from a
+        Microsoft Word document, we'll do some cleaning up to make the breaks flow more easily.
+        <br><br>
+        Thanks for stopping by.
+      </div>
+      <i class="icon-play marker" style="display: none"></i>
+    </article>
+
+    <script>
+      (function(d, s, id) {
+        var js, tjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) { return; }
+        js = d.createElement(s);
+        js.id = id;
+        js.src = (window.location.hostname === 'promptr.tv')
+          ? 'https://promptr.tv/remote/socket.io/socket.io.js'
+          : 'http://' + window.location.hostname + ':3000/socket.io/socket.io.js';
+        tjs.parentNode.insertBefore(js, tjs);
+      }(document, 'script', 'teleprompter-socket'));
+    </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-S1R98WW400"></script>
+
+    <script>
+      window['ga-disable-G-S1R98WW400'] = (window.location.hostname !== 'promptr.tv');
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag('js', new Date());
+      gtag('config', 'G-S1R98WW400', {
+        'anonymize_ip': true,
+        'allow_google_signals': false
+      });
+    </script>
+
+    <script src="assets/js/plugins.v120.js"></script>
+    <script src="assets/js/script.v120.js"></script>
+
+    <script>
+      // Load Service Worker for PWA
+      if (typeof navigator !== 'undefined' && 'serviceWorker' in navigator) {
+        navigator.serviceWorker.register('./sw.js').then(function(reg) {
+          console.log('Successfully registered service worker', reg);
+        }).catch(function(err) {
+          console.warn('Error whilst registering service worker', err);
+        });
+      }
+
+      // Initialize App
+      window.onload = function() {
+        TelePrompter.init();
+      };
+    </script>
+  </body>
 </html>
