@@ -1,0 +1,13 @@
+services:
+  server:
+    build: .
+    image: ghcr.io/manifestinteractive/teleprompter
+    command: server
+    ports:
+      - '3000:3000'
+  client:
+    build: .
+    image: ghcr.io/manifestinteractive/teleprompter
+    command: client
+    ports:
+      - '8080:8080'

@@ -67,6 +67,17 @@ server {
 }
 ```
 
+#### Running as a Docker container
+
+This project provides a development container which can be built from the local Dockerfile, as well as pre-built images on the [Github Container Registry](https://github.com/manifestinteractive/teleprompter/pkgs/container/teleprompter). You can use docker-compose to launch both TelePrompter's server and client containers.
+
+```sh
+docker compose build  # optional, if you have made code changes
+docker compose up
+```
+
+These containers are good enough for development or use across a local network but are not hardened for production. If you intend to run them on the public internet you should start by deploying them behind a reverse proxy as explained above.
+
 Automated Control
 ---
 
