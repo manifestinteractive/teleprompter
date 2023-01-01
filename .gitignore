@@ -8,3 +8,4 @@ Thumbs.db
 .idea
 *.log
 node_modules
+!.nvmrc

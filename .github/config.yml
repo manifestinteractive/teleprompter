@@ -1,0 +1,8 @@
+newIssueWelcomeComment: >
+    Thanks for opening your first issue! Reports like these help improve the project!
+newPRWelcomeComment: >
+    Thanks for opening this pull request!
+firstPRMergeComment: >
+    Congrats on merging your first pull request!
+todo:
+    keyword: '@todo'

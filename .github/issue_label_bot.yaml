@@ -1,0 +1,5 @@
+label-alias:
+    bug: 'Bug Report'
+    dependencies: 'Dependencies'
+    feature_request: 'Feature Request'
+    question: 'Question'
