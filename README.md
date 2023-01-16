@@ -1,5 +1,5 @@
 Project Support
----
+===
 
 If you or your company enjoy using this project, please consider supporting my work and joining my discord. 💖
 
