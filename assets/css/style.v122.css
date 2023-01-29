@@ -351,6 +351,36 @@ input[type="color"]::-webkit-color-swatch {
   border-radius: 8px;
 }
 
+#get-help {
+  color: #999;
+  top: 0;
+  left: 10px;
+  position: absolute;
+  z-index: 100;
+  width: 60px;
+  height: 60px;
+  display: block;
+  line-height: 60px;
+  text-decoration: none;
+  text-align: center;
+  font-size: 40px;
+  transition: color 0.25s;
+}
+#get-help:hover, #get-help:focus {
+  color: #FFF;
+}
+
+a.sponsor-project {
+  cursor: pointer;
+  pointer-events: all;
+  color: #4197d7;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+a.sponsor-project:hover, a.sponsor-project:focus {
+  text-decoration: underline;
+}
+
 @media only screen and (min-width: 601px) and (max-width: 960px) {
   header {
     height: 130px;
@@ -393,6 +423,10 @@ input[type="color"]::-webkit-color-swatch {
 
   .buttons {
     margin-right: 0 !important;
+  }
+
+  #get-help {
+    left: 0;
   }
 }
 
@@ -490,6 +524,14 @@ input[type="color"]::-webkit-color-swatch {
   .overlay .bottom {
     top: 230px;
   }
+
+  #get-help {
+    left: 0;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    font-size: 30px;
+  }
 }
 
 @media only screen and (min-width: 376px) and (max-width: 420px) {
@@ -528,6 +570,10 @@ input[type="color"]::-webkit-color-swatch {
 
   .sliders label > span {
     display: unset;
+  }
+
+  #get-help {
+    left: 40px;
   }
 }
 

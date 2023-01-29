@@ -5,6 +5,11 @@ TelePrompter - Change Log
 
 ![icon](assets/img/icon-256x256.png "icon")
 
+:white_check_mark: v1.2.2 Release Notes ( January 29th, 2023 )
+---
+
+- [X] Added Help link to GitHub Project for easier access to support
+
 :white_check_mark: v1.2.1 Release Notes ( December 31st, 2022 )
 ---
 

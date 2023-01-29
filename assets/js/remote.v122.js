@@ -1,6 +1,6 @@
 /**
- * TelePrompter v1.2.0 - Browser-based TelePrompter with Remote Control
- * (c) 2021 Peter Schmalfeldt
+ * TelePrompter v1.2.2 - Browser-based TelePrompter with Remote Control
+ * (c) 2023 Peter Schmalfeldt
  * License: https://github.com/manifestinteractive/teleprompter/blob/master/LICENSE
  */
  var TelePrompterRemote = (function() {
