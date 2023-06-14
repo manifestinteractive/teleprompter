@@ -8,10 +8,10 @@ self.addEventListener('install', function(e) {
         caches.open(cacheName).then(function(cache) {
             return cache.addAll([
                 './',
-                './assets/css/style.v120.css',
+                './assets/css/style.v122.css',
                 './assets/css/font-awesome.min.css',
-                './assets/js/plugins.v120.js',
-                './assets/js/script.v120.js'
+                './assets/js/plugins.v122.js',
+                './assets/js/script.v122.js'
             ]).then(function() {
                 self.skipWaiting();
             });
